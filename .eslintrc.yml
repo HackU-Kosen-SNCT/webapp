@@ -1,0 +1,10 @@
+root: true
+env:
+  browser: true
+  es2020: true
+extends:
+  - tuxsnct
+  - tuxsnct/preact
+  - tuxsnct/typescript
+parserOptions:
+  project: ./tsconfig.json
