@@ -1,19 +1,13 @@
 {
-  "name": "preact-typescript-template",
+  "name": "webapp",
   "version": "1.0.0",
-  "description": "Template for personal Preact projects using TypeScript.",
+  "private": true,
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/tuxsnct/preact-typescript-template.git"
+    "url": "https://github.com/HackU-Kosen-SNCT/webapp.git"
   },
   "license": "MIT",
-  "author": {
-    "name": "Hideki Tanaka",
-    "email": "work@tuxsnct.com",
-    "url": "https://tuxsnct.com/"
-  },
-  "main": "src/index.js",
   "scripts": {
     "build": "vite build",
     "start": "vite",
@@ -28,8 +22,6 @@
     "react-dom": "npm:@preact/compat@^17.0.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "15.0.0",
-    "@commitlint/config-conventional": "15.0.0",
     "@preact/preset-vite": "2.1.5",
     "@types/react": "17.0.37",
     "@types/react-dom": "17.0.11",
