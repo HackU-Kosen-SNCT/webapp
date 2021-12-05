@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "ESNext",
     "target": "ESNext",
-    "lib": ["DOM", "ESNext"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "jsx": "preserve",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
@@ -10,5 +10,6 @@
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "resolveJsonModule": true
-  }
+  },
+  "include": ["src"]
 }

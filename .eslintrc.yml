@@ -4,7 +4,7 @@ env:
   es2020: true
 extends:
   - tuxsnct
-  - tuxsnct/preact
+  - tuxsnct/react
   - tuxsnct/typescript
 parserOptions:
   project: ./tsconfig.json
