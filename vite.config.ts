@@ -1,13 +1,30 @@
-import preactPlugin from '@preact/preset-vite'
+import reactPlugin from '@vitejs/plugin-react'
 import { UserConfig } from 'vite'
-import babelMacrosPlugin from 'vite-plugin-babel-macros'
 import { VitePWA as vitePwaPlugin } from 'vite-plugin-pwa'
 
 const config: UserConfig = {
   base: './',
   plugins: [
-    babelMacrosPlugin(),
-    preactPlugin(),
+    reactPlugin({
+      babel: {
+        plugins: [
+          'babel-plugin-macros',
+          [
+            '@emotion/babel-plugin-jsx-pragmatic',
+            {
+              export: 'jsx',
+              import: '__cssprop',
+              module: '@emotion/react'
+            }
+          ],
+          [
+            '@babel/plugin-transform-react-jsx',
+            { pragma: '__cssprop' },
+            'twin.macro'
+          ]
+        ]
+      }
+    }),
     vitePwaPlugin({
       registerType: 'autoUpdate',
       workbox: {
