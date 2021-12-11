@@ -1,13 +1,49 @@
 import React from 'react'
 import tw, { css } from 'twin.macro'
-import { CenteringLayout } from '../../layouts'
+import { BackButton, ColorPickerBox, Heading, Progress, TextBox } from '../../components'
+import { FixedLayout } from '../../layouts'
+
+const colors = [
+  '#ffffff',
+  '#000000',
+  '#999999',
+  '#ff2323',
+  '#ff3399',
+  '#ff33ff',
+  '#9933ff',
+  '#3333ff',
+  '#3399ff',
+  '#33ffff',
+  '#33ff33',
+  '#99ff33',
+  '#ffff33',
+  '#ff9933'
+]
 
 const RegisterOverview: React.FC = () => (
-  <CenteringLayout
-    title="この落とし物を登録しますか?"
+  <FixedLayout
+    title="落とし物について教えてください"
     headerProps={{ css: css(tw`underline`) }}
+    topComponent={
+      <>
+        <BackButton />
+        <Progress stepLabels={['カテゴリ選択', '詳細入力', '写真を取る', '確認']} currentStep={2} />
+      </>
+    }
+    scrollable
+    autoHeight
   >
-  </CenteringLayout>
+    <div tw="w-full space-y-12">
+      <div>
+        <Heading variant="h3">色</Heading>
+        <ColorPickerBox colors={colors} />
+      </div>
+      <div>
+        <Heading variant="h3">詳細</Heading>
+        <TextBox />
+      </div>
+    </div>
+  </FixedLayout>
 )
 
 export {

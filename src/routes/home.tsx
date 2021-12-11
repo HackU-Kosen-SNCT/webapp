@@ -4,7 +4,7 @@ import { useLocation } from 'wouter'
 import undrawCollecting from '../assets/undraw_collecting.svg'
 import undrawDeliveries from '../assets/undraw_deliveries_-131-a.svg'
 import undrawOrderDelivered from '../assets/undraw_order_delivered_re_v4ab.svg'
-import { ImageButton } from '../components/button'
+import { ImageButton } from '../components'
 import { CenteringLayout } from '../layouts'
 
 const HomeImageButton =
@@ -17,19 +17,20 @@ const HomeImageButton =
       imgContainerProps={{ css: css(tw`h-28 px-4 mb-8`) }}
     />
 
-const HomeButtonStack = tw.div`flex space-x-16`
-
 const imageButtons = [
   {
     href: '/register',
+    label: '落とし物登録',
     src: undrawCollecting as string
   },
   {
     href: '/lafs',
+    label: '落とし物一覧',
     src: undrawDeliveries as string
   },
   {
     href: '/receive',
+    label: '落とし物受け取り',
     src: undrawOrderDelivered as string
   }
 ]
@@ -38,8 +39,12 @@ const Home: React.FC = () => {
   const [, setLocation] = useLocation()
 
   return (
-    <CenteringLayout title="落とし物ターミナル" titleVariant="h1" headerProps={{ css: css(tw`underline`) }}>
-      <HomeButtonStack>
+    <CenteringLayout
+      title="落とし物ターミナル"
+      titleVariant="h1"
+      headerProps={{ css: css(tw`underline`) }}
+    >
+      <div tw="flex space-x-16 mt-16">
         {
           imageButtons.map((imageButton, index) => (
             <HomeImageButton
@@ -47,11 +52,11 @@ const Home: React.FC = () => {
               onClick={() => setLocation(imageButton.href)}
               key={index}
             >
-              落とし物登録
+              {imageButton.label}
             </HomeImageButton>
           ))
         }
-      </HomeButtonStack>
+      </div>
     </CenteringLayout>
   )
 }

@@ -1,11 +1,11 @@
 import React from 'react'
 import tw from 'twin.macro'
 
-const Button = tw.button`bg-white rounded-xl shadow-button text-lg font-semibold`
+const ButtonContainerBase = tw.button`bg-white rounded-xl shadow-custom text-lg font-semibold text-primarydeep`
 
-const ButtonText = tw.span`text-lg font-semibold text-primarydeep`
+const TextButton = tw(ButtonContainerBase)`px-8 py-6 rounded-l-full rounded-r-full`
 
-const ImageButtonContainer = tw(Button)`w-48 pt-12 pb-8`
+const ImageButtonContainer = tw(ButtonContainerBase)`w-48 pt-12 pb-8 text-lg font-semibold`
 
 type ImageButtonProperties = React.ComponentProps<React.ReactHTML['button']> & {
   children: string,
@@ -19,11 +19,23 @@ const ImageButton: React.FC<ImageButtonProperties> = ({ src, children, imgProps,
     <div tw="flex-grow-0" {...imgContainerProps}>
       <img src={src} alt={children} {...imgProps} />
     </div>
-    <ButtonText>{ children }</ButtonText>
+    <span>{ children }</span>
   </ImageButtonContainer>
 )
 
+const BackButtonContainer =
+  tw(ButtonContainerBase)`
+    absolute top-8 left-8  p-4 flex justify-center items-center text-3xl font-normal shadow-none rounded-full
+  `
+
+const BackButton: React.FC = () => (
+  <BackButtonContainer onClick={() => history.back()}>
+    <span tw="w-10 h-10 flex justify-center items-center">←</span>
+  </BackButtonContainer>
+)
+
 export {
-  Button,
-  ImageButton
+  TextButton,
+  ImageButton,
+  BackButton
 }

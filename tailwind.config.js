@@ -25,7 +25,11 @@ module.exports = {
     },
     extend: {
       boxShadow: {
-        button: '0 3px 0 0 #b7c8bf'
+        custom: '0 3px 0 0 #b7c8bf'
+      },
+      padding: {
+        '1/2': '50%',
+        full: '100%'
       }
     }
   },

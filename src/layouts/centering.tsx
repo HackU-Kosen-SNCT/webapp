@@ -3,7 +3,7 @@ import tw from 'twin.macro'
 import { Heading } from '../components'
 import { LayoutContainer, LayoutHeader, LayoutMain, LayoutProperties } from './common'
 
-const CenterContainer = tw.div`flex justify-center items-center flex-col py-8 space-y-16`
+const CenterContainer = tw.div`flex justify-center items-center flex-col py-8`
 
 type Centering = {
   headerProps?: React.ComponentProps<React.ReactHTML['header']>,
@@ -16,25 +16,40 @@ const CenteringLayout: React.FC<LayoutProperties<Centering>> = ({
   children,
   topComponent,
   headerProps,
-  mainProps
+  mainProps,
+  scrollable,
+  autoHeight
 }) => (
-  <LayoutContainer tw="justify-center items-center flex-col">
-    {topComponent}
-    <CenterContainer>
-      <LayoutHeader {...headerProps}>
+  <div css={[tw`w-full h-screen bg-lightgrey2`, !scrollable && tw`flex flex-col overflow-hidden`]}>
+    {
+      topComponent &&
+      <div tw="w-full pt-8 pb-24 flex justify-center items-center">
+        {topComponent}
+      </div>
+    }
+    <LayoutContainer css={[tw`flex items-center justify-center`, autoHeight && tw`h-auto`]}>
+      <CenterContainer>
         {
-          Array.isArray(title)
-            ? title.map(
-              (value, index) => <Heading variant={titleVariant} key={index} tw="text-center">{value}</Heading>
-            )
-            : <Heading variant={titleVariant} tw="text-center">{title}</Heading>
+          title &&
+          <LayoutHeader {...headerProps}>
+            {
+              Array.isArray(title)
+                ? title.map(
+                  (value, index) => <Heading variant={titleVariant} key={index} tw="text-center">{value}</Heading>
+                )
+                : <Heading variant={titleVariant} tw="text-center">{title}</Heading>
+            }
+          </LayoutHeader>
         }
-      </LayoutHeader>
-      <LayoutMain {...mainProps}>
-        { children }
-      </LayoutMain>
-    </CenterContainer>
-  </LayoutContainer>
+        {
+          children &&
+          <LayoutMain {...mainProps}>
+            { children }
+          </LayoutMain>
+        }
+      </CenterContainer>
+    </LayoutContainer>
+  </div>
 )
 
 export {

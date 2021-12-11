@@ -3,12 +3,14 @@ import tw from 'twin.macro'
 import { Heading } from '../components'
 
 type LayoutProperties<T = Record<string, unknown>> = T & {
-  title: string | string[],
+  title?: string | string[],
   titleVariant?: React.ComponentProps<typeof Heading>['variant'],
-  topComponent?: React.ReactChildren
+  topComponent?: React.ReactNode,
+  scrollable?: boolean,
+  autoHeight?: boolean
 }
 
-const LayoutContainer = tw.div`w-full h-screen flex bg-lightgrey2 py-16`
+const LayoutContainer = tw.div`w-full h-full bg-lightgrey2`
 
 const LayoutHeader = tw.header`w-full`
 

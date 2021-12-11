@@ -1,9 +1,9 @@
 import React from 'react'
 import tw from 'twin.macro'
 
-const Heading1 = tw.h1`font-semibold text-5xl`
-const Heading2 = tw.h2`font-semibold text-4xl`
-const Heading3 = tw.h3`font-semibold text-3xl`
+const Heading1 = tw.h1`font-semibold text-5xl text-primarydeep`
+const Heading2 = tw.h2`font-semibold text-4xl text-primarydeep`
+const Heading3 = tw.h3`font-semibold text-3xl text-primarydeep`
 
 type HeadingProperties = React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> & {
   variant: 'h1' | 'h2' | 'h3'

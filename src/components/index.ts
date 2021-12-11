@@ -1,2 +1,5 @@
 export * from './app'
+export * from './button'
+export * from './input'
+export * from './progress'
 export * from './typography'
