@@ -14,6 +14,8 @@ const RegisterConfirm: React.FC = () => (
       </>
     }
   >
+    <div tw="flex flex-col space-y-16">
+    </div>
   </CenteringLayout>
 )
 

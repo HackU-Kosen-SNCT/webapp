@@ -23,6 +23,17 @@ const ImageButton: React.FC<ImageButtonProperties> = ({ src, children, imgProps,
   </ImageButtonContainer>
 )
 
+const CategoryButtonContainer = tw(ButtonContainerBase)`w-full p-4 rounded-3xl`
+
+type CategoryButtonProperties = React.ComponentProps<React.ReactHTML['button']>
+
+// TODO: アイコンを設定できるようにする
+const CategoryButton: React.FC<CategoryButtonProperties> = ({ children, ...rest }) => (
+  <CategoryButtonContainer {...rest}>
+    {children}
+  </CategoryButtonContainer>
+)
+
 const BackButtonContainer =
   tw(ButtonContainerBase)`
     absolute top-8 left-8  p-4 flex justify-center items-center text-3xl font-normal shadow-none rounded-full
@@ -37,5 +48,6 @@ const BackButton: React.FC = () => (
 export {
   TextButton,
   ImageButton,
+  CategoryButton,
   BackButton
 }

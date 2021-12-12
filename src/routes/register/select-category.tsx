@@ -1,5 +1,6 @@
 import React from 'react'
-import { BackButton, Progress } from '../../components'
+import tw from 'twin.macro'
+import { BackButton, CategoryShelf, Progress } from '../../components'
 import { FixedLayout } from '../../layouts'
 
 const RegisterSelectCategory: React.FC = () => (
@@ -12,7 +13,13 @@ const RegisterSelectCategory: React.FC = () => (
       </>
     }
     scrollable
+    autoHeight
   >
+    <div tw="mx-12 space-y-16">
+      <CategoryShelf mainLabel="貴重品" subLabels={['財布', 'スマホ', 'カギ']} />
+      <CategoryShelf mainLabel="勉強" subLabels={['文房具', '教科書', 'ノート・ファイル', '関数電卓']} />
+      <CategoryShelf mainLabel="電子機器" subLabels={['カギ', 'カギ']} />
+    </div>
   </FixedLayout>
 )
 

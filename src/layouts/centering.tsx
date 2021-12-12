@@ -27,7 +27,7 @@ const CenteringLayout: React.FC<LayoutProperties<Centering>> = ({
         {topComponent}
       </div>
     }
-    <LayoutContainer css={[tw`flex items-center justify-center`, autoHeight && tw`h-auto`]}>
+    <LayoutContainer css={[tw`flex items-center justify-center`, autoHeight && tw`h-auto pb-12`]}>
       <CenterContainer>
         {
           title &&

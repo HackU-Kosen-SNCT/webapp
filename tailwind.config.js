@@ -24,6 +24,9 @@ module.exports = {
       white: '#ffffff'
     },
     extend: {
+      borderWidth: {
+        1: '1px'
+      },
       boxShadow: {
         custom: '0 3px 0 0 #b7c8bf'
       },

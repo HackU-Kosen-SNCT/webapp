@@ -18,7 +18,7 @@ const FixedLayout: React.FC<LayoutProperties> = ({
         {topComponent}
       </div>
     }
-    <LayoutContainer css={[autoHeight && tw`h-auto`]}>
+    <LayoutContainer css={[autoHeight && tw`h-auto pb-12`]}>
       <LayoutHeader tw="px-12 mb-12">
         {
           Array.isArray(title)

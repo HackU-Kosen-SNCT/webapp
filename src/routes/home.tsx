@@ -14,7 +14,7 @@ const HomeImageButton =
       {...properties}
       tw="py-6"
       imgProps={{ css: css(tw`h-full flex`) }}
-      imgContainerProps={{ css: css(tw`h-28 px-4 mb-8`) }}
+      imgContainerProps={{ css: css(tw`h-40 px-4 mb-8`) }}
     />
 
 const imageButtons = [
