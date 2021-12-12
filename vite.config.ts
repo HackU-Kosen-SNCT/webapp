@@ -3,7 +3,6 @@ import { UserConfig } from 'vite'
 import { VitePWA as vitePwaPlugin } from 'vite-plugin-pwa'
 
 const config: UserConfig = {
-  base: './',
   plugins: [
     reactPlugin({
       babel: {
