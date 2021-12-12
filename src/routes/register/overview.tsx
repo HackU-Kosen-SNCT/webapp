@@ -43,6 +43,7 @@ const RegisterOverview: React.FC = () => (
         <TextBox />
       </div>
     </div>
+    {/* TODO: 次に進むボタンを追加する */}
   </FixedLayout>
 )
 

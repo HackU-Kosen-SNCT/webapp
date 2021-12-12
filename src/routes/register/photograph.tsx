@@ -15,6 +15,7 @@ const RegisterPhotograph: React.FC = () => (
       </>
     }
   >
+    {/* TODO: 写真撮影のロジックを追加する */}
     <img src={undrawCamera as string} alt="写真を取る" tw="h-64 mt-8 mb-16" />
     <TextButton>カメラを起動する</TextButton>
   </CenteringLayout>
