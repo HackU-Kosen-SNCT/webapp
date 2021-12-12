@@ -27,6 +27,9 @@ const Heading: React.FC<HeadingProperties> = ({ variant, ...properties }) => {
   return component
 }
 
+const Text = tw.span`text-primarydeep`
+
 export {
-  Heading
+  Heading,
+  Text
 }
