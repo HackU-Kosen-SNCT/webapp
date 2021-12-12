@@ -5,7 +5,7 @@ import { CenteringLayout } from '../../layouts'
 
 const ReceiveConfirm: React.FC = () => (
   <CenteringLayout
-    title="この落とし物を受け取りますか?"
+    title="学生課の人から落とし物を受け取ってください?"
     headerProps={{ css: css(tw`underline`) }}
     topComponent={
       <>
