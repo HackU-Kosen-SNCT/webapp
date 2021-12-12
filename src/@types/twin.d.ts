@@ -16,6 +16,7 @@ declare module 'react' {
   interface HTMLAttributes<T> extends DOMAttributes<T> {
     css?: CSSInterpolation
     tw?: string
+    as?: string | React.ElementType
   }
   // The inline svg css prop
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
