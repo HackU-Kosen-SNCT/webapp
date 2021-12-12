@@ -17,21 +17,27 @@ const TextBox: React.FC<TextBoxProperties> = (properties) => (
   />
 )
 
+const ColorBase = tw.input`w-10 h-10 rounded-full border-2 border-grey2 focus:border-deepdeepgrey2 appearance-none`
+
+type ColorProperties = React.ComponentProps<React.ReactHTML['input']> & {
+  color: string
+}
+
+const Color: React.FC<ColorProperties> = ({ color, ...rest }) => (
+  <ColorBase type="radio" css={css`background: ${color}`} {...rest} />
+)
+
 const ColorPickerBox: React.FC<ColorPickerBoxProperties> = ({ colors, ...rest }) => {
   const name = nanoid()
 
   return (
-    <div tw="flex flex-wrap justify-between bg-white shadow-custom rounded-xl text-lg font-semibold p-8">
+    <div
+      tw="grid grid-cols-10 justify-items-center gap-y-8 bg-white shadow-custom rounded-xl text-lg font-semibold p-8"
+      {...rest}
+    >
       {
         colors.map(
-          (color, index) => <input
-            {...rest}
-            type="radio"
-            key={index}
-            name={name}
-            css={css`background: ${color}`}
-            tw="w-10 h-10 rounded-full border-2 border-grey2 focus:border-deepdeepgrey2 appearance-none"
-          />
+          (color, index) => <Color key={index} name={name} color={color} />
         )
       }
     </div>
@@ -40,5 +46,6 @@ const ColorPickerBox: React.FC<ColorPickerBoxProperties> = ({ colors, ...rest })
 
 export {
   TextBox,
+  Color,
   ColorPickerBox
 }

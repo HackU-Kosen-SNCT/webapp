@@ -3,14 +3,13 @@ import tw from 'twin.macro'
 import { Heading } from '../components'
 import { LayoutContainer, LayoutHeader, LayoutMain, LayoutProperties } from './common'
 
-const CenterContainer = tw.div`flex justify-center items-center flex-col py-8`
+const CenterContainer = tw.div`flex justify-center items-center flex-col py-8 space-y-8`
 
 type Centering = {
-  headerProps?: React.ComponentProps<React.ReactHTML['header']>,
-  mainProps?: React.ComponentProps<React.ReactHTML['main']>,
   centering?: boolean
 }
 
+// eslint-disable-next-line max-lines-per-function
 const CenteringLayout: React.FC<LayoutProperties<Centering>> = ({
   title,
   titleVariant = 'h2',
@@ -22,7 +21,13 @@ const CenteringLayout: React.FC<LayoutProperties<Centering>> = ({
   autoHeight,
   centering
 }) => (
-  <div css={[tw`w-full h-screen bg-lightgrey2`, !scrollable && tw`flex flex-col overflow-hidden`]}>
+  <div
+    css={[
+      tw`w-full h-screen bg-lightgrey2`,
+      !scrollable && tw`flex flex-col overflow-hidden`,
+      scrollable && centering && tw`flex flex-col`
+    ]}
+  >
     {
       topComponent &&
       <div tw="w-full pt-8 pb-24 flex justify-center items-center z-10">
@@ -33,7 +38,7 @@ const CenteringLayout: React.FC<LayoutProperties<Centering>> = ({
       css={[
         tw`flex items-center justify-center`,
         autoHeight && tw`h-auto pb-12`,
-        centering && tw`absolute top-0 left-0`
+        centering && tw`absolute top-0 left-0 z-0`
       ]}
     >
       <CenterContainer>

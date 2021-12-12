@@ -23,7 +23,7 @@ const ImageButton: React.FC<ImageButtonProperties> = ({ src, children, imgProps,
   </ImageButtonContainer>
 )
 
-const CategoryButtonContainer = tw(ButtonContainerBase)`w-full p-4 rounded-3xl`
+const CategoryButtonContainer = tw(ButtonContainerBase)`p-4 rounded-3xl`
 
 type CategoryButtonProperties = React.ComponentProps<React.ReactHTML['button']>
 

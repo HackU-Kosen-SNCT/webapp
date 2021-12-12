@@ -1,5 +1,5 @@
 import React from 'react'
-import { BackButton, Progress } from '../../components'
+import { BackButton, Modal, Progress } from '../../components'
 import { FixedLayout } from '../../layouts'
 
 const ReceiveSelectLaf: React.FC = () => (
@@ -12,6 +12,7 @@ const ReceiveSelectLaf: React.FC = () => (
       </>
     }
   >
+    <Modal />
   </FixedLayout>
 )
 

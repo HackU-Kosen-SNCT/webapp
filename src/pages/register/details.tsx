@@ -20,7 +20,7 @@ const colors = [
   '#ff9933'
 ]
 
-const RegisterOverview: React.FC = () => (
+const RegisterDetails: React.FC = () => (
   <FixedLayout
     title="落とし物について教えてください"
     headerProps={{ css: css(tw`underline`) }}
@@ -48,5 +48,5 @@ const RegisterOverview: React.FC = () => (
 )
 
 export {
-  RegisterOverview
+  RegisterDetails
 }

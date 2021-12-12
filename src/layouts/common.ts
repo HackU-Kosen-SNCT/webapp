@@ -6,6 +6,8 @@ type LayoutProperties<T = Record<string, unknown>> = T & {
   title?: string | string[],
   titleVariant?: React.ComponentProps<typeof Heading>['variant'],
   topComponent?: React.ReactNode,
+  headerProps?: React.ComponentProps<React.ReactHTML['header']>,
+  mainProps?: React.ComponentProps<React.ReactHTML['main']>,
   scrollable?: boolean,
   autoHeight?: boolean
 }

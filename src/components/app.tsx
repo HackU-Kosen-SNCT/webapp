@@ -36,7 +36,7 @@ const App: React.FC = () => {
           <Redirect to="/register/select-category" replace={true} />
         </Route>
         <Route path="/register/select-category" component={pages.RegisterSelectCategory} />
-        <Route path="/register/overview" component={pages.RegisterOverview} />
+        <Route path="/register/details" component={pages.RegisterDetails} />
         <Route path="/register/photograph" component={pages.RegisterPhotograph} />
         <Route path="/register/confirm" component={pages.RegisterConfirm} />
         <Route path="/register/complete" component={pages.RegisterComplete} />

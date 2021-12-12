@@ -8,6 +8,8 @@ const FixedLayout: React.FC<LayoutProperties> = ({
   titleVariant = 'h2',
   children,
   topComponent,
+  headerProps,
+  mainProps,
   scrollable,
   autoHeight
 }) => (
@@ -19,7 +21,7 @@ const FixedLayout: React.FC<LayoutProperties> = ({
       </div>
     }
     <LayoutContainer css={[autoHeight && tw`h-auto pb-12`]}>
-      <LayoutHeader tw="px-12 mb-12">
+      <LayoutHeader tw="px-12 mb-12" {...headerProps}>
         {
           Array.isArray(title)
             ? title.map((value, index) => <Heading variant={titleVariant} key={index} tw="underline">{value}</Heading>)
@@ -28,7 +30,7 @@ const FixedLayout: React.FC<LayoutProperties> = ({
       </LayoutHeader>
       {
         children &&
-          <LayoutMain tw="px-12">
+          <LayoutMain tw="px-12" {...mainProps}>
             { children }
           </LayoutMain>
       }

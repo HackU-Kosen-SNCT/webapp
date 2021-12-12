@@ -1,6 +1,7 @@
 import React from 'react'
 import tw, { css } from 'twin.macro'
-import { BackButton, Progress } from '../../components'
+import undrawICanFly from '../../assets/undraw_i_can_fly_-7-egl.svg'
+import { BackButton, Progress, LafOverview } from '../../components'
 import { CenteringLayout } from '../../layouts'
 
 const RegisterConfirm: React.FC = () => (
@@ -13,9 +14,17 @@ const RegisterConfirm: React.FC = () => (
         <Progress stepLabels={['カテゴリ選択', '詳細入力', '写真を取る', '確認']} currentStep={4} />
       </>
     }
+    scrollable
+    autoHeight
   >
-    <div tw="flex flex-col space-y-16">
-    </div>
+    {/* TODO: 仮のデータから変更する */}
+    <LafOverview
+      imageSource={undrawICanFly as string}
+      category="カギ"
+      description="キーホルダーがついています。\nTextTextText"
+      color="#000000"
+      actionLabel="登録する"
+    />
   </CenteringLayout>
 )
 
