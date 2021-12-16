@@ -1,11 +1,13 @@
 import { useState } from 'preact/hooks'
+import tw from 'twin.macro'
 import React, { useEffect } from 'react'
 import { BackButton, LafShelf, Modal } from '../components'
 import { FixedLayout } from '../layouts'
 
 // TODO: このページを完成させる
 const Lafs: React.FC = () => {
-  const [boolean , setboolean] = useState(false)
+  const [Modalstate, setModalstate] = useState<boolean>(false)
+  const [Modalimg, setModalimg] = useState<string>("")
 
   useEffect(() => {
     // 表示されたときに、バックエンドからデータを取得してstateにぶちこむ
@@ -20,15 +22,20 @@ const Lafs: React.FC = () => {
         </>
       }
     >
-    <Modal active = {boolean}>
-      <span>aiueo</span>
+    <Modal active = {Modalstate}>
+      <div tw="w-4/12">
+        <img src={Modalimg}/>
+      </div>
     </Modal>
+
+
     <LafShelf
-      name="Bayathy"
+      name="スマホ"
       color="#FF00FF"
       imgurl="http://free-photo.net/photo_img/081241411241.jpg"
       onClick={()=>{
-        setboolean(true)
+        setModalstate(true)
+        setModalimg("http://free-photo.net/photo_img/081241411241.jpg")
       }}/>
     </FixedLayout>
   )
