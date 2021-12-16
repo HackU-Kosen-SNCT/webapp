@@ -17,9 +17,9 @@ export const registerItemState = atom<RegisterItem>({
     category: 'その他',
     detail: '',
     color: '#FFFFFF',
-    created_at: new Date().toISOString(),
+    created_at: '',
     image_url: '',
-    item_id: String(Date.now())
+    item_id: ''
   }
 })
 

@@ -57,12 +57,12 @@ const RegisterConfirm: React.FC = () => {
   const registerItemValue: RegisterItem = useRecoilValue<RegisterItem>(registerItemState)
   const handleClick = () => {
     const requestData = {
-      item_id: registerItemValue.item_id,
+      item_id: String(Date.now()),
       category: toAllowCategory(registerItemValue.category),
       color:  registerItemValue.color,
       detail: registerItemValue.detail,
       image_url: 'https://hogehogeogheogoe',
-      created_at: registerItemValue.created_at,
+      created_at: new Date().toISOString(),
     }
     console.log(requestData)
     // API access
