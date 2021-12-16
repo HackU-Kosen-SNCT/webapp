@@ -104,7 +104,7 @@ const ReceiveSelectLaf: React.FC = () => {
                             text-3xl font-semibold underline">
                     この落とし物を受け取りますか?
                   </div>
-                  <div tw="w-1/2 m-0 m-auto"><img tw="rounded-xl" alt="落とし物の画像" src={modalData?.image_url}/></div>
+                  <div tw="w-1/2 m-0 m-auto"><img tw="rounded-xl" alt="落とし物" src={modalData?.image_url}/></div>
                   <div tw="flex justify-center">
                     <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
                     </div>
