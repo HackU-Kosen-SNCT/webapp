@@ -25,6 +25,7 @@
     "qrcode.react": "^1.0.1",
     "react": "npm:@preact/compat@^17.0.3",
     "react-dom": "npm:@preact/compat@^17.0.3",
+    "react-webcam": "^6.0.0",
     "recoil": "^0.5.2",
     "wouter": "^2.8.0-alpha.2"
   },
