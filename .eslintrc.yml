@@ -10,3 +10,5 @@ parserOptions:
   project: ./tsconfig.json
 rules:
   "@typescript-eslint/no-unused-vars": [1, {varsIgnorePattern: tw}]
+  capitalized-comments: 0
+  no-secrets/no-secrets: 0

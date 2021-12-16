@@ -15,7 +15,7 @@ const RegisterComplete: React.FC = () => {
           {/* TODO: valueを正しい値に置き換える */}
           <QRCode value="https://github.com/hacku-kosen-snct/webapp" size={240} css={tw`bg-white p-6 rounded-xl`} />
           <Text tw="text-lg">
-          LINE BotからQRコードリーダーを開いて、このQRコードを読むことで、落とし物の持ち主からメッセージが届くかもしれません。
+            LINE BotからQRコードリーダーを開いて、このQRコードを読むことで、落とし物の持ち主からメッセージが届くかもしれません。
           </Text>
         </div>
         <TextButton onClick={() => setLocation('/')}>ホームに戻る</TextButton>

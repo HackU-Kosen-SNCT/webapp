@@ -35,6 +35,7 @@ const imageButtons = [
   }
 ]
 
+// TODO: 左上にロゴを追加する
 const Home: React.FC = () => {
   const [, setLocation] = useLocation()
 

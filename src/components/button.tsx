@@ -1,7 +1,8 @@
 import React from 'react'
 import tw from 'twin.macro'
 
-const ButtonContainerBase = tw.button`bg-white rounded-xl shadow-custom text-lg font-semibold text-primarydeep`
+const ButtonContainerBase =
+  tw.button`bg-white rounded-xl shadow-custom text-lg font-semibold text-primarydeep disabled:bg-grey`
 
 const TextButton = tw(ButtonContainerBase)`px-8 py-6 rounded-l-full rounded-r-full`
 
@@ -27,7 +28,7 @@ const CategoryButtonContainer = tw(ButtonContainerBase)`p-4 rounded-3xl`
 
 type CategoryButtonProperties = React.ComponentProps<React.ReactHTML['button']>
 
-// TODO: アイコンを設定できるようにする
+// TODO: アイコンを設定できるようにする（進捗によっては切り捨ててもいいかも）
 const CategoryButton: React.FC<CategoryButtonProperties> = ({ children, ...rest }) => (
   <CategoryButtonContainer {...rest}>
     {children}

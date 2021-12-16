@@ -10,6 +10,14 @@ type ModalProperties = {
   active?: boolean
 }
 
+/*
+ * Modalコンポーネントのchildrenがモーダルとして表示される
+ * activeがtrueになっていたら表示される
+ *
+ * <Modal active>
+ *   <span>あいうえお</span>
+ * </Modal>
+ */
 const Modal: React.FC<ModalProperties> = ({ children, active }) => (
   <ModalContainer css={[!active && tw`invisible`]}>
     {children}

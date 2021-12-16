@@ -7,7 +7,8 @@ type LafOverviewProperties = {
   category: string,
   description: string
   color: string,
-  actionLabel: string
+  actionLabel: string,
+  actionButtonProps: React.ComponentProps<React.ReactHTML['button']>
 }
 
 const LafOverview: React.FC<LafOverviewProperties> = ({
@@ -16,6 +17,7 @@ const LafOverview: React.FC<LafOverviewProperties> = ({
   description,
   color,
   actionLabel,
+  actionButtonProps,
   ...rest
 }) => (
   <div tw="flex flex-col items-center space-y-8" {...rest}>
@@ -34,7 +36,7 @@ const LafOverview: React.FC<LafOverviewProperties> = ({
         ))
       }
     </p>
-    <TextButton>{actionLabel}</TextButton>
+    <TextButton {...actionButtonProps}>{actionLabel}</TextButton>
   </div>
 )
 

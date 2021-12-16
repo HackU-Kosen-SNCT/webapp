@@ -5,9 +5,9 @@ import tw from 'twin.macro'
 
 type TextBoxProperties = React.ComponentProps<React.ReactHTML['textarea']>
 
-type ColorPickerBoxProperties = React.ComponentProps<React.ReactHTML['input']> & {
+type ColorPickerBoxProperties = React.ComponentProps<React.ReactHTML['div']> & {
   colors: string[];
-  type?: never
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TextBox: React.FC<TextBoxProperties> = (properties) => (
@@ -24,20 +24,23 @@ type ColorProperties = React.ComponentProps<React.ReactHTML['input']> & {
 }
 
 const Color: React.FC<ColorProperties> = ({ color, ...rest }) => (
-  <ColorBase type="radio" css={css`background: ${color}`} {...rest} />
+  <ColorBase type="radio" css={css`background: ${color}`} id={color} {...rest} />
 )
 
-const ColorPickerBox: React.FC<ColorPickerBoxProperties> = ({ colors, ...rest }) => {
+const ColorPickerBox: React.FC<ColorPickerBoxProperties> = ({ colors, onChange, ...rest }) => {
   const name = nanoid()
 
   return (
     <div
       tw="grid grid-cols-10 justify-items-center gap-y-8 bg-white shadow-custom rounded-xl text-lg font-semibold p-8"
+      onChange={onChange}
       {...rest}
     >
       {
         colors.map(
-          (color, index) => <Color key={index} name={name} color={color} />
+          (color, index) => (
+            <Color key={index} name={name} color={color} />
+          )
         )
       }
     </div>

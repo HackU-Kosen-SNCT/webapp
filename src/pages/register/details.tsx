@@ -1,6 +1,7 @@
 import React from 'react'
 import tw, { css } from 'twin.macro'
-import { BackButton, ColorPickerBox, Heading, Progress, TextBox } from '../../components'
+import { useLocation } from 'wouter'
+import { BackButton, ColorPickerBox, Heading, Progress, TextBox, TextButton } from '../../components'
 import { FixedLayout } from '../../layouts'
 
 const colors = [
@@ -20,32 +21,47 @@ const colors = [
   '#ff9933'
 ]
 
-const RegisterDetails: React.FC = () => (
-  <FixedLayout
-    title="落とし物について教えてください"
-    headerProps={{ css: css(tw`underline`) }}
-    topComponent={
-      <>
-        <BackButton />
-        <Progress stepLabels={['カテゴリ選択', '詳細入力', '写真を取る', '確認']} currentStep={2} />
-      </>
-    }
-    scrollable
-    autoHeight
-  >
-    <div tw="w-full space-y-12">
-      <div>
-        <Heading variant="h3">色</Heading>
-        <ColorPickerBox colors={colors} />
-      </div>
-      <div>
-        <Heading variant="h3">詳細</Heading>
-        <TextBox />
-      </div>
-    </div>
-    {/* TODO: 次に進むボタンを追加する */}
-  </FixedLayout>
-)
+const RegisterDetails: React.FC = () => {
+  const [, setLocation] = useLocation()
+  const handleSubmit = () => {
+    setLocation('/register/photograph')
+  }
+
+  return (
+    <FixedLayout
+      title="落とし物について教えてください"
+      headerProps={{ css: css(tw`underline`) }}
+      topComponent={
+        <>
+          <BackButton />
+          <Progress stepLabels={['カテゴリ選択', '詳細入力', '写真を取る', '確認']} currentStep={2} />
+        </>
+      }
+      scrollable
+      autoHeight
+    >
+      <form tw="w-full space-y-12 flex flex-col items-center">
+        <div tw="w-full">
+          <Heading variant="h3">色</Heading>
+          {/* TODO: フォームを作る */}
+          <ColorPickerBox
+            colors={colors}
+            // 以下のようにevent.target.idから現在の色を取得できる
+            // eslint-disable-next-line no-alert
+            onChange={(event) => alert((event.target as (EventTarget & HTMLInputElement)).id)}
+          />
+        </div>
+        <div tw="w-full">
+          <Heading variant="h3">詳細</Heading>
+          {/* 以下のようにevent.target.idから現在の詳細の値を取得できる */}
+          {/* eslint-disable-next-line no-alert */}
+          <TextBox onChange={(event) => alert(event.target.value)} />
+        </div>
+        <TextButton as="input" type="submit" onClick={handleSubmit}>次に進む</TextButton>
+      </form>
+    </FixedLayout>
+  )
+}
 
 export {
   RegisterDetails
