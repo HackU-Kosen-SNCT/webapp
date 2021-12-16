@@ -11,8 +11,8 @@ const ReceiveSendLetter: React.FC = () => {
   const handleClick = () => {
     // TODO: バックエンドとの通信処理を追加
     const requestData = {
-      item_id:
-      message:
+      item_id: String(new Date()),
+      message: 'hogehoge',
       received_at: new Date().toISOString(),
     }
     axios({

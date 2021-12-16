@@ -15,6 +15,10 @@ export type ReceiveItem = {
   item_id: string;
   message: string;
   received_at: string;
+  category: categoryTexts;
+  detail: string | null;
+  color: ColorType;
+  imsge_url: string;
 }
 
 // 落とし物登録時
@@ -41,9 +45,13 @@ export const pictureData = atom<string>({
 export const receiveLafItemState = atom<ReceiveItem>({
   key: 'receiveLafItemState',
   default: {
-    item_id: '',
-    message: '',
-    received_at: ''
+  item_id: '',
+  message: '',
+  received_at: '',
+  category: 'その他',
+  detail: "",
+  color: '#FFFFFF',
+  imsge_url: '',
   }
 })
 

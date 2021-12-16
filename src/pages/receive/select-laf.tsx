@@ -7,6 +7,7 @@ import undrawEmpty from '../../assets/undraw_empty.svg'
 import { BackButton, Modal, Progress, LafShelf, Modalicon } from '../../components'
 import { FixedLayout } from '../../layouts'
 import { ReceiveItem, receiveLafItemState } from '../../store'
+import { useLocation } from 'wouter'
 
 type item = {
   item_id: string
@@ -38,8 +39,8 @@ const ReceiveSelectLaf: React.FC = () => {
   const [error, setError] = useState<boolean>(false)
   const [modal, setModal] = useState<boolean>(false)
   const [modalData, setModalData] = useState<item>()
-  const receiveLafItemValue: ReceiveItem = useRecoilValue<ReceiveItem>(receiveLafItemState)
   const setReceiveLafItemState: SetterOrUpdater<ReceiveItem> = useSetRecoilState(receiveLafItemState)
+  const [, setLocation] = useLocation()
 
   useEffect(() => {
     axios({
@@ -60,17 +61,23 @@ const ReceiveSelectLaf: React.FC = () => {
 
 
   const handleClick = () => {
-    // モーダルの解除
-    setModal(false)
-
     // storeに値を突っ込む
     setReceiveLafItemState((prevValue: ReceiveItem) => {
-      return {
-        item_id: modalData!.item_id,
-        message: prevValue.message,
-        received_at: prevValue.received_at
-      }
+      // return {
+      //   // item_id: modalData!.item_id,
+      //   // message: prevValue.message,
+      //   // received_at: prevValue.received_at,
+      //   // category: modalData!.category,
+      //   // detail: modalData!.detail,
+      //   // color: modalData!.color,
+      //   // imsge_url: modalData!.image_url,
+      // }
+      return prevValue
     })
+    // モーダルの解除
+    setModal(false)
+    //遷移
+    setLocation('/receive/confirm')
   }
 
   return (
@@ -125,7 +132,7 @@ const ReceiveSelectLaf: React.FC = () => {
                   </div>
                   <div tw="w-full text-center mt-10">{modalData?.detail}</div>
                   <div tw="flex justify-center ">
-                    <button onClick={() => {handleClick}}
+                    <button onClick={handleClick}
                       tw="bg-white w-1/4 mt-10 shadow-custom pl-5 pr-5 pt-4 pb-4 rounded-3xl">
                       受け取る
                     </button>
