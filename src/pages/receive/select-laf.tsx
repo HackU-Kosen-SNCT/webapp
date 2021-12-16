@@ -99,7 +99,7 @@ const ReceiveSelectLaf: React.FC = () => {
                 ))}
               </div>
               <Modal active={modal} onClick={() => setModal(false)}>
-                <div tw="w-1/2 h-3/4 bg-lightgrey2 rounded-xl">
+                <div tw="w-1/2 py-8 bg-lightgrey2 rounded-xl">
                   <div tw="w-full mt-14 mb-6 text-center text-primarydeep
                             text-3xl font-semibold underline">
                     この落とし物を受け取りますか?
