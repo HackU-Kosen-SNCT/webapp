@@ -102,11 +102,11 @@ const Lafs: React.FC = () => {
               <Modal active={modal} onClick={() => setModal(false)}>
                 <div tw="w-1/2 h-3/4 bg-lightgrey2 rounded-xl">
                   <div tw="w-1/2 m-0 m-auto"><img tw="rounded-xl mt-10" alt="落とし物の画像" src={modalData?.image_url}/></div>
-                  <div tw="flex justify-center">
-                    <Modalicon category={modalData?.category}/>
-                    <Colorcircle color={modalData?.color}/>
+                  <div tw="flex justify-center items-center space-x-8">
+                    <div><Modalicon category={modalData?.category}/></div>
+                    <div><Colorcircle tw="w-12 h-12" color={modalData?.color}/></div>
                   </div>
-                  <div tw="w-full text-center mt-10 text-2xl">{modalData?.detail}</div>
+                  <div tw="w-full text-center mt-10 text-3xl font-semibold">{modalData?.detail}</div>
                 </div>
               </Modal>
             </>

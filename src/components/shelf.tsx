@@ -36,8 +36,8 @@ type ColorProperties = React.ComponentProps<React.ReactHTML['div']> & {
   color: string | undefined
 }
 
-const Colorcircle: React.VFC<ColorProperties> = ({ color }) => (
-  <Circlebase css = {css`background: ${color}`}/>
+const Colorcircle: React.VFC<ColorProperties> = ({ color, ...rest }) => (
+  <Circlebase css = {css`background: ${color}`} {...rest} />
 )
 
 type LafShelfProperties = {
