@@ -66,7 +66,7 @@ const ReceiveSelectLaf: React.FC = () => {
     // storeに値を突っ込む
     setReceiveLafItemState((prevValue: ReceiveItem) => {
       return {
-        item_id: modalData?.item_id,
+        item_id: modalData!.item_id,
         message: prevValue.message,
         received_at: prevValue.received_at
       }
