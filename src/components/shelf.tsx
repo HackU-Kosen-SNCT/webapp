@@ -41,10 +41,11 @@ type LafShelfProperties = {
   name : string
   imgurl : string
   color : string
+  onClick: React.MouseEventHandler<HTMLDivElement>
 }
 
-const LafShelf: React.FC<LafShelfProperties> = ({ name, imgurl, color }) => (
-  <div tw="w-4/12">
+const LafShelf: React.FC<LafShelfProperties> = ({ name, imgurl, color, onClick }) => (
+  <div tw="w-4/12" onClick={onClick}>
     <img tw="rounded-lg" src={imgurl} alt="落とし物画像"/>
     <div tw="flex items-center">
       <span tw="m-0 m-auto pl-10">{name}</span>

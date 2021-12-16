@@ -1,9 +1,12 @@
+import { useState } from 'preact/hooks'
 import React, { useEffect } from 'react'
 import { BackButton, LafShelf, Modal } from '../components'
 import { FixedLayout } from '../layouts'
 
 // TODO: このページを完成させる
 const Lafs: React.FC = () => {
+  const [boolean , setboolean] = useState(false)
+
   useEffect(() => {
     // 表示されたときに、バックエンドからデータを取得してstateにぶちこむ
   }, [])
@@ -17,11 +20,16 @@ const Lafs: React.FC = () => {
         </>
       }
     >
-      <Modal />
-      <LafShelf
-        name="Bayathy"
-        color="#FF00FF"
-        imgurl="http://free-photo.net/photo_img/081241411241.jpg"/>
+    <Modal active = {boolean}>
+      <span>aiueo</span>
+    </Modal>
+    <LafShelf
+      name="Bayathy"
+      color="#FF00FF"
+      imgurl="http://free-photo.net/photo_img/081241411241.jpg"
+      onClick={()=>{
+        setboolean(true)
+      }}/>
     </FixedLayout>
   )
 }
