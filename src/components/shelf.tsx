@@ -1,3 +1,5 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { css } from '@emotion/react'
 import React from 'react'
 import tw from 'twin.macro'
@@ -33,7 +35,7 @@ type ColorProperties = React.ComponentProps<React.ReactHTML['div']> & {
   color: string
 }
 
-const Color: React.VFC<ColorProperties> = ({ color }) => (
+const Colorcircle: React.VFC<ColorProperties> = ({ color }) => (
   <Circlebase css = {css`background: ${color}`}/>
 )
 
@@ -45,16 +47,18 @@ type LafShelfProperties = {
 }
 
 const LafShelf: React.VFC<LafShelfProperties> = ({ name, imgurl, color, onClick }) => (
+  // eslint-disable-next-line jsx-a11y/no-static-element-interactions
   <div tw="w-4/12" onClick={onClick}>
     <img tw="rounded-lg" src={imgurl} alt="落とし物画像"/>
     <div tw="flex items-center mt-3">
       <span tw="m-0 m-auto  text-2xl pl-5 font-bold">{name}</span>
-      <Color tw ="" color ={color}/>
+      <Colorcircle tw ="" color ={color}/>
     </div>
   </div>
 )
 
 export {
   CategoryShelf,
-  LafShelf
+  LafShelf,
+  Colorcircle
 }
