@@ -1,9 +1,9 @@
-import axios, { AxiosPromise } from 'axios'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import tw from 'twin.macro'
 import undrawDogWorking from '../../assets/undraw_dog_walking_re_l61p 1.svg'
 import undrawEmpty from '../../assets/undraw_empty.svg'
-import { BackButton, Modal, Progress } from '../../components'
+import { BackButton, Modal, Progress, LafShelf } from '../../components'
 import { FixedLayout } from '../../layouts'
 
 type item = {
@@ -16,23 +16,36 @@ type item = {
   received_at: Date | null
 }
 
-const client = axios.create({
-  baseURL: 'https://togather-api.takumma.net/',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  responseType: 'json'
-})
+type response = {
+  data: {
+    items: item[]
+  }
+}
 
-const fetchAllItems = ():AxiosPromise<item[]> => client.get('laf')
+type modaldata = {
+  category: string
+  color: string
+  detail: string | null
+  image_url: string
+}
 
+// eslint-disable-next-line max-lines-per-function
 const ReceiveSelectLaf: React.FC = () => {
   const [lafs, setLafs] = useState<item[]>([])
   const [error, setError] = useState<boolean>(false)
+  const [modal, setModal] = useState<boolean>(false)
+  const [modalData, setModalData] = useState<modaldata>()
   useEffect(() => {
-    fetchAllItems()
-      .then((response) => {
-        setLafs(response.data)
+    axios({
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'GET',
+      responseType: 'json',
+      url: 'https://togather-api.takumma.net/laf'
+    })
+      .then((result: response) => {
+        setLafs(result.data.items)
       })
       .catch(() => {
         setError(true)
@@ -63,7 +76,47 @@ const ReceiveSelectLaf: React.FC = () => {
             </div>
           )
           : (
-            <Modal />
+            <>
+              <div tw="grid grid-cols-3 gap-8">
+                { lafs.map((laf, index) => (
+                  <LafShelf
+                    category={laf.category}
+                    imgurl={laf.image_url}
+                    color={laf.color}
+                    onClick={() => {
+                      setModal(true)
+                      setModalData({
+                        category: laf.category,
+                        color: laf.color,
+                        detail: laf.detail,
+                        image_url: laf.image_url
+                      })
+                    }}
+                    key={index}
+                  />
+                ))}
+              </div>
+              <Modal active={modal} onClick={() => setModal(false)}>
+                <div tw="w-1/2 h-3/4 bg-lightgrey2 rounded-xl">
+                  <div tw="w-full mt-14 mb-6 text-center text-primarydeep
+                            text-3xl font-semibold underline">
+                    この落とし物を受け取りますか?
+                  </div>
+                  <div tw="w-1/2 m-0 m-auto"><img tw="rounded-xl" alt="落とし物の画像" src={modalData?.image_url}/></div>
+                  <div tw="flex justify-center">
+                    <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
+                    </div>
+                  </div>
+                  <div tw="w-full text-center mt-10">{modalData?.detail}</div>
+                  <div tw="flex justify-center ">
+                    <button onClick={() => setModal(false)}
+                      tw="bg-white w-1/4 mt-10 shadow-custom pl-5 pr-5 pt-4 pb-4 rounded-3xl">
+                      受け取る
+                    </button>
+                  </div>
+                </div>
+              </Modal>
+            </>
           ))}
     </FixedLayout>
   )
