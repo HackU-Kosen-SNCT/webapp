@@ -76,27 +76,11 @@ const RegisterPhotograph: React.FC = () => {
       centering
     >
       <form tw="w-full flex flex-col items-center space-y-8">
-        <img src={imageSource} alt="写真を取る" tw="h-60 mb-8 rounded-3xl" />
-        <div tw="space-x-8">
-          <TextButton as="label" onClick={() => setCaptureEnable(true)}>
-            {imageSource === undrawCamera ? 'カメラを起動する' : '撮り直す'}
-            {/*<input type="file" accept="image/*" css={css`display: none;`} ref={inputElement} onChange={() => setCaptureEnable(true)} /> */}
-          </TextButton>
-          <TextButton
-            as="input"
-            type="submit"
-            onClick={handleSubmit}
-            disabled={imageSource === undrawCamera}
-          >
-            次に進む
-          </TextButton>
-        </div>
-      </form>
-      {isCaptureEnable && (
+        {isCaptureEnable || (
+          <img src={imageSource} alt="写真を取る" tw="h-60 mb-8 rounded-3xl" />
+        )}
+        {isCaptureEnable && (
         <>
-          <div>
-            <button onClick={() => setCaptureEnable(false)}>終了</button>
-          </div>
           <div>
             <Webcam
               audio={false}
@@ -107,9 +91,32 @@ const RegisterPhotograph: React.FC = () => {
               videoConstraints={videoConstraints}
             />
           </div>
-          <button onClick={capture}>キャプチャ</button>
         </>
       )}
+        <div tw="space-x-8">
+          {isCaptureEnable || (
+            <TextButton as="label" onClick={() => setCaptureEnable(true)}>
+              {imageSource === undrawCamera ? 'カメラを起動する' : '撮り直す'}
+            </TextButton>
+          )}
+          {isCaptureEnable && (
+            <TextButton as="label" onClick={() => {
+              setCaptureEnable(false)
+              capture()
+            }}>
+              {'撮影する'}
+            </TextButton>
+          )}
+          <TextButton
+            as="input"
+            type="submit"
+            onClick={handleSubmit}
+            disabled={imageSource === undrawCamera}
+          >
+            次に進む
+          </TextButton>
+        </div>
+      </form>
     </CenteringLayout>
   )
 }
