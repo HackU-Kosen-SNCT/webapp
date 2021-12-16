@@ -5,7 +5,7 @@ import { useLocation } from 'wouter'
 import undrawCamera from '../../assets/undraw_camera_re_cnp4.svg'
 import { BackButton, Progress, TextButton } from '../../components'
 import { CenteringLayout } from '../../layouts'
-import { RegisterItem, registerItemState } from '../../store'
+import { pictureData, RegisterItem, registerItemState } from '../../store'
 import Webcam from 'react-webcam'
 
 const videoConstraints = {
@@ -20,6 +20,9 @@ const RegisterPhotograph: React.FC = () => {
   const inputElement = useRef<HTMLInputElement>(null)
   let registerItemValue: RegisterItem = useRecoilValue<RegisterItem>(registerItemState);
   const setRegisterItemState: SetterOrUpdater<RegisterItem> = useSetRecoilState(registerItemState)
+
+
+  const setPictureDataState: SetterOrUpdater<string> = useSetRecoilState(pictureData);
 
   const [, setLocation] = useLocation()
 
@@ -60,6 +63,7 @@ const RegisterPhotograph: React.FC = () => {
   }
 
   const handleSubmit = () => {
+    setPictureDataState(imageSource)
     setLocation('/register/confirm')
   }
 

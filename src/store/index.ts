@@ -1,6 +1,6 @@
-import { atom } from "recoil";
-import { categoryTexts } from "../@types/category";
-import { ColorType } from "../@types/color";
+import { atom } from "recoil"
+import { categoryTexts } from "../@types/category"
+import { ColorType } from "../@types/color"
 
 export type RegisterItem = {
   category: categoryTexts;
@@ -11,6 +11,13 @@ export type RegisterItem = {
   item_id: string;
 }
 
+export type ReceiveItem = {
+  item_id: string;
+  message: string;
+  received_at: string;
+}
+
+// 落とし物登録時
 export const registerItemState = atom<RegisterItem>({
   key: 'registerItemState',
   default: {
@@ -20,6 +27,23 @@ export const registerItemState = atom<RegisterItem>({
     created_at: '',
     image_url: '',
     item_id: ''
+  }
+})
+
+// react-webcamで取得した画像データ
+export const pictureData = atom<string>({
+  key: 'pictureData',
+  default: ''
+})
+
+
+// 落とし物受け取る時のメッセージ
+export const receiveLafItemState = atom<ReceiveItem>({
+  key: 'receiveLafItemState',
+  default: {
+    item_id: '',
+    message: '',
+    received_at: ''
   }
 })
 

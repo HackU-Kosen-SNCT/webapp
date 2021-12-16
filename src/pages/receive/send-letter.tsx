@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 import tw, { css } from 'twin.macro'
 import { useLocation } from 'wouter'
@@ -9,6 +10,26 @@ const ReceiveSendLetter: React.FC = () => {
   const [, setLocation] = useLocation()
   const handleClick = () => {
     // TODO: バックエンドとの通信処理を追加
+    const requestData = {
+      item_id:
+      message:
+      received_at: new Date().toISOString(),
+    }
+    axios({
+      method: 'PATCH',
+      url: 'http://localhost:3001/laf/receive',
+      data: requestData,
+      headers: {
+        'Content-Type': 'application/json',
+        accept: 'application/json'
+      },
+    }).then((res) => {
+      console.log(res)
+      setLocation('/register/complete')
+    })
+      .catch((error) => {
+        console.log(error)
+      })
     setLocation('/receive/complete')
   }
 

@@ -1,10 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from 'recoil'
 import tw from 'twin.macro'
 import undrawDogWorking from '../../assets/undraw_dog_walking_re_l61p 1.svg'
 import undrawEmpty from '../../assets/undraw_empty.svg'
 import { BackButton, Modal, Progress, LafShelf, Modalicon } from '../../components'
 import { FixedLayout } from '../../layouts'
+import { ReceiveItem, receiveLafItemState } from '../../store'
 
 type item = {
   item_id: string
@@ -27,6 +29,7 @@ type modaldata = {
   color: string
   detail: string | null
   image_url: string
+  item_id: string
 }
 
 // eslint-disable-next-line max-lines-per-function
@@ -34,7 +37,10 @@ const ReceiveSelectLaf: React.FC = () => {
   const [lafs, setLafs] = useState<item[]>([])
   const [error, setError] = useState<boolean>(false)
   const [modal, setModal] = useState<boolean>(false)
-  const [modalData, setModalData] = useState<modaldata>()
+  const [modalData, setModalData] = useState<item>()
+  const receiveLafItemValue: ReceiveItem = useRecoilValue<ReceiveItem>(receiveLafItemState)
+  const setReceiveLafItemState: SetterOrUpdater<ReceiveItem> = useSetRecoilState(receiveLafItemState)
+
   useEffect(() => {
     axios({
       headers: {
@@ -51,6 +57,22 @@ const ReceiveSelectLaf: React.FC = () => {
         setError(true)
       })
   }, [])
+
+
+  const handleClick = () => {
+    // モーダルの解除
+    setModal(false)
+
+    // storeに値を突っ込む
+    setReceiveLafItemState((prevValue: ReceiveItem) => {
+      return {
+        item_id: modalData?.item_id,
+        message: prevValue.message,
+        received_at: prevValue.received_at
+      }
+    })
+  }
+
   return (
     <FixedLayout
       title="受け取る落とし物を選択してください"
@@ -85,12 +107,7 @@ const ReceiveSelectLaf: React.FC = () => {
                     color={laf.color}
                     onClick={() => {
                       setModal(true)
-                      setModalData({
-                        category: laf.category,
-                        color: laf.color,
-                        detail: laf.detail,
-                        image_url: laf.image_url
-                      })
+                      setModalData(laf)
                     }}
                     key={index}
                   />
@@ -108,7 +125,7 @@ const ReceiveSelectLaf: React.FC = () => {
                   </div>
                   <div tw="w-full text-center mt-10">{modalData?.detail}</div>
                   <div tw="flex justify-center ">
-                    <button onClick={() => setModal(false)}
+                    <button onClick={() => {handleClick}}
                       tw="bg-white w-1/4 mt-10 shadow-custom pl-5 pr-5 pt-4 pb-4 rounded-3xl">
                       受け取る
                     </button>
