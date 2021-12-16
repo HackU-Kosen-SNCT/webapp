@@ -56,20 +56,20 @@ const RegisterConfirm: React.FC = () => {
   const [, setLocation] = useLocation()
   const registerItemValue: RegisterItem = useRecoilValue<RegisterItem>(registerItemState)
   const handleClick = () => {
-    console.log(registerItemValue.color?.toLocaleUpperCase())
-    console.log(toAllowCategory(registerItemValue.category))
+    const requestData = {
+      item_id: registerItemValue.item_id,
+      category: toAllowCategory(registerItemValue.category),
+      color:  registerItemValue.color,
+      detail: registerItemValue.detail,
+      image_url: 'https://hogehogeogheogoe',
+      created_at: registerItemValue.created_at,
+    }
+    console.log(requestData)
     // API access
     axios({
       method: 'POST',
       url: 'http://localhost:3001/laf',
-      data: {
-        item_id: String(Math.floor(Date.now())),
-        category: toAllowCategory(registerItemValue.category),
-        color:  registerItemValue.color,
-        detail: registerItemValue.detail,
-        image_url: 'https://hogehogeogheogoe',
-        created_at: new Date().toISOString(),
-      },
+      data: requestData,
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json'

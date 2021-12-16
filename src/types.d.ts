@@ -129,7 +129,7 @@ export const toAllowCategory = (text: categoryTexts): allowCategories => {
 
 export const colors = [
   '#ffffff',
-  '#000000',
+  '#02331B',
   '#999999',
   '#ff2323',
   '#ff3399',

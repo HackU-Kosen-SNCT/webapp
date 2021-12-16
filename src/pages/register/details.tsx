@@ -7,21 +7,21 @@ import { BackButton, ColorPickerBox, Heading, Progress, TextBox, TextButton } fr
 import { FixedLayout } from '../../layouts'
 import { RegisterItem, registerItemState } from '../../store'
 
-export const colors = [
-  '#ffffff',
-  '#000000',
+export const colors: ColorType[] = [
+  '#FFFFFF',
+  '#02331B',
   '#999999',
-  '#ff2323',
-  '#ff3399',
-  '#ff33ff',
-  '#9933ff',
-  '#3333ff',
-  '#3399ff',
-  '#33ffff',
-  '#33ff33',
-  '#99ff33',
-  '#ffff33',
-  '#ff9933'
+  '#FF2323',
+  '#FF3399',
+  '#FF33FF',
+  '#9933FF',
+  '#3333FF',
+  '#3399FF',
+  '#33FFFF',
+  '#33FF33',
+  '#99FF33',
+  '#FFFF33',
+  '#FF9933'
 ];
 
 const RegisterDetails: React.FC = () => {
