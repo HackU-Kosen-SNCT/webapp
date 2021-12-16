@@ -12,7 +12,7 @@ import { VscJersey as Clothes } from 'react-icons/vsc'
 import tw from 'twin.macro'
 
 type Category ={
-  category : string
+  category : string | undefined
 }
 
 // eslint-disable-next-line max-lines-per-function
