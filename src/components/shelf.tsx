@@ -1,3 +1,6 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { css } from '@emotion/react'
 import React from 'react'
 import tw from 'twin.macro'
 import { CategoryButton } from './'
@@ -26,12 +29,37 @@ const CategoryShelf: React.FC<CategoryShelfProperties> = ({ mainLabel, subLabels
   </div>
 )
 
-// TODO: 落とし物一覧のコンポーネントを完成させる
-/*
- * type LafShelfProperties = {}
- * const LafShelf: React.FC<LafShelfProperties> = () => {}
- */
+const Circlebase = tw.div` w-8 h-8 rounded-full border-2 border-grey2 focus:border-deepdeepgrey2 appearance-none mr-5`
+
+type ColorProperties = React.ComponentProps<React.ReactHTML['div']> & {
+  color: string
+}
+
+const Colorcircle: React.VFC<ColorProperties> = ({ color }) => (
+  <Circlebase css = {css`background: ${color}`}/>
+)
+
+type LafShelfProperties = {
+  category : string
+  imgurl : string
+  color : string
+  onClick: React.MouseEventHandler<HTMLDivElement>
+  key: React.Key | null | undefined
+}
+
+const LafShelf: React.VFC<LafShelfProperties> = ({ category, imgurl, color, onClick, key }) => (
+  // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+  <div onClick={onClick} key={key}>
+    <img tw="rounded-lg" src={imgurl} alt="落とし物画像"/>
+    <div tw="flex items-center mt-3">
+      <span tw="m-0 m-auto  text-2xl pl-5 font-bold">{category}</span>
+      <Colorcircle color ={color}/>
+    </div>
+  </div>
+)
 
 export {
-  CategoryShelf
+  CategoryShelf,
+  LafShelf,
+  Colorcircle
 }
