@@ -8,6 +8,7 @@ const ModalContainer = styled.div([
 
 type ModalProperties = {
   active?: boolean
+  onClick: React.MouseEventHandler<HTMLDivElement>
 }
 
 /*
@@ -18,8 +19,8 @@ type ModalProperties = {
  *   <span>あいうえお</span>
  * </Modal>
  */
-const Modal: React.FC<ModalProperties> = ({ children, active }) => (
-  <ModalContainer css={[!active && tw`invisible`]}>
+const Modal: React.FC<ModalProperties> = ({ children, active, onClick }) => (
+  <ModalContainer css={[!active && tw`invisible`]} onClick={onClick}>
     {children}
   </ModalContainer>
 )

@@ -40,19 +40,20 @@ const Colorcircle: React.VFC<ColorProperties> = ({ color }) => (
 )
 
 type LafShelfProperties = {
-  name : string
+  category : string
   imgurl : string
   color : string
   onClick: React.MouseEventHandler<HTMLDivElement>
+  key: React.Key | null | undefined
 }
 
-const LafShelf: React.VFC<LafShelfProperties> = ({ name, imgurl, color, onClick }) => (
+const LafShelf: React.VFC<LafShelfProperties> = ({ category, imgurl, color, onClick, key }) => (
   // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-  <div tw="w-4/12" onClick={onClick}>
+  <div onClick={onClick} key={key}>
     <img tw="rounded-lg" src={imgurl} alt="落とし物画像"/>
     <div tw="flex items-center mt-3">
-      <span tw="m-0 m-auto  text-2xl pl-5 font-bold">{name}</span>
-      <Colorcircle tw ="" color ={color}/>
+      <span tw="m-0 m-auto  text-2xl pl-5 font-bold">{category}</span>
+      <Colorcircle color ={color}/>
     </div>
   </div>
 )
