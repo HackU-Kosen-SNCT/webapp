@@ -29,10 +29,11 @@ const CategoryShelf: React.FC<CategoryShelfProperties> = ({ mainLabel, subLabels
   </div>
 )
 
-const Circlebase = tw.div` w-8 h-8 rounded-full border-2 border-grey2 focus:border-deepdeepgrey2 appearance-none mr-5`
+const Circlebase = tw.div`w-8 h-8 rounded-full border-2 
+border-grey2 focus:border-deepdeepgrey2 appearance-none m-0 m-auto`
 
 type ColorProperties = React.ComponentProps<React.ReactHTML['div']> & {
-  color: string
+  color: string | undefined
 }
 
 const Colorcircle: React.VFC<ColorProperties> = ({ color }) => (
@@ -52,7 +53,7 @@ const LafShelf: React.VFC<LafShelfProperties> = ({ category, imgurl, color, onCl
   <div onClick={onClick} key={key}>
     <img tw="rounded-lg" src={imgurl} alt="落とし物画像"/>
     <div tw="flex items-center mt-3">
-      <span tw="m-0 m-auto  text-2xl pl-5 font-bold">{category}</span>
+      <span tw="m-0 m-auto text-2xl pl-10 font-bold">{category}</span>
       <Colorcircle color ={color}/>
     </div>
   </div>
