@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from 'recoil'
 import tw, { css } from 'twin.macro'
 import { useLocation } from 'wouter'
@@ -6,6 +6,13 @@ import undrawCamera from '../../assets/undraw_camera_re_cnp4.svg'
 import { BackButton, Progress, TextButton } from '../../components'
 import { CenteringLayout } from '../../layouts'
 import { RegisterItem, registerItemState } from '../../store'
+import Webcam from 'react-webcam'
+
+const videoConstraints = {
+  width: 720,
+  height: 360,
+  facingMode: 'user'
+}
 
 // eslint-disable-next-line max-lines-per-function
 const RegisterPhotograph: React.FC = () => {
@@ -15,6 +22,20 @@ const RegisterPhotograph: React.FC = () => {
   const setRegisterItemState: SetterOrUpdater<RegisterItem> = useSetRecoilState(registerItemState)
 
   const [, setLocation] = useLocation()
+
+  const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false);
+  const webcamRef = React.useRef<Webcam>(null);
+  const [url, setUrl] = useState<string | null>(null);
+  const capture = React.useCallback(
+    () => {
+      const imageSrc = webcamRef.current?.getScreenshot();
+      if (imageSrc) {
+        setUrl(imageSrc)
+        setImageSource(imageSrc)
+      }
+    },
+    [webcamRef]
+  );
 
   // 写真のdata urlを取得できるのでどこか（storeなりurlパラメータなり）にぶちこむ
   const handleChange = () => {
@@ -57,9 +78,9 @@ const RegisterPhotograph: React.FC = () => {
       <form tw="w-full flex flex-col items-center space-y-8">
         <img src={imageSource} alt="写真を取る" tw="h-60 mb-8 rounded-3xl" />
         <div tw="space-x-8">
-          <TextButton as="label">
+          <TextButton as="label" onClick={() => setCaptureEnable(true)}>
             {imageSource === undrawCamera ? 'カメラを起動する' : '撮り直す'}
-            <input type="file" accept="image/*" css={css`display: none;`} ref={inputElement} onChange={handleChange} />
+            {/*<input type="file" accept="image/*" css={css`display: none;`} ref={inputElement} onChange={() => setCaptureEnable(true)} /> */}
           </TextButton>
           <TextButton
             as="input"
@@ -71,6 +92,24 @@ const RegisterPhotograph: React.FC = () => {
           </TextButton>
         </div>
       </form>
+      {isCaptureEnable && (
+        <>
+          <div>
+            <button onClick={() => setCaptureEnable(false)}>終了</button>
+          </div>
+          <div>
+            <Webcam
+              audio={false}
+              width={540}
+              height={360}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              videoConstraints={videoConstraints}
+            />
+          </div>
+          <button onClick={capture}>キャプチャ</button>
+        </>
+      )}
     </CenteringLayout>
   )
 }
