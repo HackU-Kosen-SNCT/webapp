@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import tw from 'twin.macro'
 import undrawDogWorking from '../assets/undraw_dog_walking_re_l61p 1.svg'
 import undrawEmpty from '../assets/undraw_empty.svg'
-import { BackButton, LafShelf, Modal, Categoryicon } from '../components'
+import { BackButton, LafShelf, Modal, Modalicon } from '../components'
 import { FixedLayout } from '../layouts'
 
 type item = {
@@ -107,7 +107,7 @@ const Lafs: React.FC = () => {
                   </div>
                   <div tw="w-1/2 m-0 m-auto"><img tw="rounded-xl" alt="落とし物の画像" src={modalData?.image_url}/></div>
                   <div tw="flex justify-center">
-                    <Categoryicon category={modalData?.category}/>
+                    <Modalicon category={modalData?.category}/>
                   </div>
                   <div tw="w-full text-center mt-10">{modalData?.detail}</div>
                   <div tw="flex justify-center ">

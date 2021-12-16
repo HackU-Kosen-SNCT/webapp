@@ -16,7 +16,7 @@ type Category ={
 }
 
 // eslint-disable-next-line max-lines-per-function
-const Categoryicon : React.FC<Category> = ({ category }) => {
+const Modalicon : React.FC<Category> = ({ category }) => {
   switch (category) {
   case 'wallet':
     return (
@@ -112,4 +112,4 @@ const Categoryicon : React.FC<Category> = ({ category }) => {
   }
 }
 
-export { Categoryicon }
+export { Modalicon }
