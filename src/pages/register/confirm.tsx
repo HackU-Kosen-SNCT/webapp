@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 import tw, { css } from 'twin.macro'
 import { useLocation } from 'wouter'
@@ -5,10 +6,33 @@ import undrawICanFly from '../../assets/undraw_i_can_fly_-7-egl.svg'
 import { BackButton, Progress, LafOverview } from '../../components'
 import { CenteringLayout } from '../../layouts'
 
+// eslint-disable-next-line max-lines-per-function
 const RegisterConfirm: React.FC = () => {
   const [, setLocation] = useLocation()
   const handleClick = () => {
-    setLocation('/register/complete')
+    // API access
+    axios({
+      data: {
+        category: 'wallet',
+        color: '#FFFFFF',
+        created_at: new Date(),
+        detail: 'hogehoge',
+        image_url: 'https://pbs.twimg.com/profile_images/1425448503010988032/p8GuVmXX_400x400.jpg',
+        item_id: '333'
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        accept: 'application/json'
+      },
+      method: 'POST',
+      url: 'http://localhost:3001/laf'
+    }).then((res) => {
+      console.log(res)
+      setLocation('/register/complete')
+    })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   return (
