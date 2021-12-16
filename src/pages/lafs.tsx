@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { BackButton, Modal } from '../components'
+import { BackButton, LafShelf, Modal } from '../components'
 import { FixedLayout } from '../layouts'
 
 // TODO: このページを完成させる
@@ -18,6 +18,10 @@ const Lafs: React.FC = () => {
       }
     >
       <Modal />
+      <LafShelf
+        name="Bayathy"
+        color="#FF00FF"
+        imgurl="http://free-photo.net/photo_img/081241411241.jpg"/>
     </FixedLayout>
   )
 }
