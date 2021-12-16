@@ -27,6 +27,7 @@ type modaldata = {
   color: string
   detail: string | null
   image_url: string
+  item_id: string
 }
 
 // eslint-disable-next-line max-lines-per-function
@@ -89,7 +90,8 @@ const ReceiveSelectLaf: React.FC = () => {
                         category: laf.category,
                         color: laf.color,
                         detail: laf.detail,
-                        image_url: laf.image_url
+                        image_url: laf.image_url,
+                        item_id: laf.item_id
                       })
                     }}
                     key={index}
