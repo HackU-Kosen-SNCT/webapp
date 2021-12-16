@@ -2,7 +2,7 @@ import { useState } from 'preact/hooks'
 import React, { useEffect } from 'react'
 import { VscJersey } from 'react-icons/vsc'
 import tw from 'twin.macro'
-import { BackButton, LafShelf, Modal } from '../components'
+import { BackButton, LafShelf, Modal, Categoryicon } from '../components'
 import { FixedLayout } from '../layouts'
 
 // TODO: このページを完成させる
