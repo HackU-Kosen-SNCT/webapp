@@ -23,14 +23,15 @@ const Lafs: React.FC = () => {
       }
     >
     <Modal active = {Modalstate}>
-      <div tw="w-4/12">
-        <img src={Modalimg}/>
+      <div tw="w-1/2 h-3/4 bg-lightgrey2 rounded-xl">
+        <div tw="w-full mt-14 mb-6 text-center text-primarydeep text-3xl font-semibold underline">この落とし物を受け取りますか?</div>
+        <div tw="w-1/2 m-0 m-auto"><img tw="rounded-xl" src={Modalimg}/></div>
       </div>
     </Modal>
 
 
     <LafShelf
-      name="スマホ"
+      name="教科書・のーと・ファイル"
       color="#FF00FF"
       imgurl="http://free-photo.net/photo_img/081241411241.jpg"
       onClick={()=>{

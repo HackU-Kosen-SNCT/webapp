@@ -48,7 +48,7 @@ const LafShelf: React.VFC<LafShelfProperties> = ({ name, imgurl, color, onClick 
   <div tw="w-4/12" onClick={onClick}>
     <img tw="rounded-lg" src={imgurl} alt="落とし物画像"/>
     <div tw="flex items-center mt-3">
-      <span tw="m-0 m-auto  text-xl pl-5 font-bold">{name}</span>
+      <span tw="m-0 m-auto  text-2xl pl-5 font-bold">{name}</span>
       <Color tw ="" color ={color}/>
     </div>
   </div>
