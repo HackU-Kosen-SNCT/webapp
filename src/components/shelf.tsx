@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import React from 'react'
 import tw from 'twin.macro'
 import { CategoryButton } from './'
@@ -26,12 +27,33 @@ const CategoryShelf: React.FC<CategoryShelfProperties> = ({ mainLabel, subLabels
   </div>
 )
 
-// TODO: 落とし物一覧のコンポーネントを完成させる
-/*
- * type LafShelfProperties = {}
- * const LafShelf: React.FC<LafShelfProperties> = () => {}
- */
+const Circlebase = tw.div`rounded-full`
+
+type ColorProperties = React.ComponentProps<React.ReactHTML['div']> & {
+  color: string
+}
+
+const Color: React.FC<ColorProperties> = ({ color }) => (
+  <Circlebase css = {css`background: ${color}`}/>
+)
+
+type LafShelfProperties = {
+  name : string
+  imgurl : string
+  color : string
+}
+
+const LafShelf: React.FC<LafShelfProperties> = ({ name, imgurl, color }) => (
+  <div>
+    <img tw="rounded-lg" src={imgurl} alt="落とし物画像"/>
+    <div>
+      <span>{name}</span>
+      <Color color ={color}/>
+    </div>
+  </div>
+)
 
 export {
-  CategoryShelf
+  CategoryShelf,
+  LafShelf
 }
