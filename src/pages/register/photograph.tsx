@@ -111,7 +111,7 @@ const RegisterPhotograph: React.FC = () => {
             as="input"
             type="submit"
             onClick={handleSubmit}
-            disabled={imageSource === undrawCamera}
+            disabled={imageSource === undrawCamera || isCaptureEnable}
           >
             次に進む
           </TextButton>
