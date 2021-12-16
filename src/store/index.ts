@@ -3,7 +3,7 @@ import { categoryTexts } from "../@types/category";
 import { ColorType } from "../@types/color";
 
 export type RegisterItem = {
-  category: categoryTexts | null;
+  category: categoryTexts;
   detail: string | null;
   color: ColorType | null;
   created_at: Date | null;
@@ -16,7 +16,7 @@ export const registerItemState = atom<RegisterItem>({
   default: {
     category: 'USBメモリ',
     detail: '',
-    color: '#000000',
+    color: '#FFFFFF',
     created_at: new Date(),
     image_url: 'http://...',
     item_id: '124'

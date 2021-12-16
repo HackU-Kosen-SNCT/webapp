@@ -2,11 +2,12 @@ import { css } from '@emotion/react'
 import { nanoid } from 'nanoid'
 import React from 'react'
 import tw from 'twin.macro'
+import { ColorType } from '../@types/color'
 
 type TextBoxProperties = React.ComponentProps<React.ReactHTML['textarea']>
 
 type ColorPickerBoxProperties = React.ComponentProps<React.ReactHTML['div']> & {
-  colors: string[];
+  colors: ColorType[];
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

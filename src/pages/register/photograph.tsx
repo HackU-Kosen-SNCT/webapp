@@ -1,14 +1,18 @@
 import React, { useRef, useState } from 'react'
+import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from 'recoil'
 import tw, { css } from 'twin.macro'
 import { useLocation } from 'wouter'
 import undrawCamera from '../../assets/undraw_camera_re_cnp4.svg'
 import { BackButton, Progress, TextButton } from '../../components'
 import { CenteringLayout } from '../../layouts'
+import { RegisterItem, registerItemState } from '../../store'
 
 // eslint-disable-next-line max-lines-per-function
 const RegisterPhotograph: React.FC = () => {
   const [imageSource, setImageSource] = useState<string>(undrawCamera as string)
   const inputElement = useRef<HTMLInputElement>(null)
+  let registerItemValue: RegisterItem = useRecoilValue<RegisterItem>(registerItemState);
+  const setRegisterItemState: SetterOrUpdater<RegisterItem> = useSetRecoilState(registerItemState)
 
   const [, setLocation] = useLocation()
 
@@ -22,6 +26,16 @@ const RegisterPhotograph: React.FC = () => {
       }
       reader.readAsDataURL(file)
     }
+    setRegisterItemState((prevValue) => {
+      return {
+        category: prevValue.category,
+        color: prevValue.color,
+        created_at: prevValue.created_at,
+        detail: prevValue.detail,
+        image_url: imageSource,
+        item_id: prevValue.item_id
+      }
+    })
   }
 
   const handleSubmit = () => {
