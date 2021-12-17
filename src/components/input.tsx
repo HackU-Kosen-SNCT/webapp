@@ -4,15 +4,15 @@ import React from 'react'
 import tw from 'twin.macro'
 import { ColorType } from '../@types/color'
 
-type TextBoxProperties = React.ComponentProps<React.ReactHTML['input']>
+type TextBoxProperties = React.ComponentProps<React.ReactHTML['textarea']>
 
 type ColorPickerBoxProperties = React.ComponentProps<React.ReactHTML['div']> & {
   colors: ColorType[];
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const TextBox: React.FC<TextBoxProperties> = (properties) => (
-  <input
+  <textarea
     tw="w-full h-48 p-8 text-xl shadow-custom rounded-xl resize-none whitespace-pre-wrap"
     {...properties}
   />

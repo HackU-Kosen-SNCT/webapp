@@ -36,7 +36,7 @@ const ReceiveSendLetter: React.FC = () => {
     setLocation('/receive/complete')
   }
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(event.target.value)
   }
 
