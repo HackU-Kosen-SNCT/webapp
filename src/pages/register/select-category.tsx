@@ -14,9 +14,9 @@ const RegisterSelectCategory: React.FC = () => {
   const setRegisterItemState: SetterOrUpdater<RegisterItem> = useSetRecoilState(registerItemState)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     // storeにカテゴリをぶち込む
-    const category = (event.target as (Element & { textContent: string })).textContent as categoryTexts
+    const Category = (event.target as (Element & { textContent: string })).textContent as categoryTexts
     setRegisterItemState((previousValue: RegisterItem) => ({
-      category,
+      category: Category,
       color: previousValue.color,
       created_at: previousValue.created_at,
       detail: previousValue.detail,
