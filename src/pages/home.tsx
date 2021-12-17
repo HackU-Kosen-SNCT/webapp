@@ -8,13 +8,12 @@ import { ImageButton } from '../components'
 import { CenteringLayout } from '../layouts'
 
 const HomeImageButton =
-  (properties: React.ComponentProps<typeof ImageButton>) =>
-    <ImageButton
-      {...properties}
-      tw="py-6"
-      imgProps={{ css: css(tw`h-full flex`) }}
-      imgContainerProps={{ css: css(tw`h-40 px-4 mb-8`) }}
-    />
+  (properties: React.ComponentProps<typeof ImageButton>) => <ImageButton
+    {...properties}
+    tw="py-6"
+    imgProps={{ css: css(tw`h-full flex`) }}
+    imgContainerProps={{ css: css(tw`h-40 px-4 mb-8`) }}
+  />
 
 const imageButtons = [
   {

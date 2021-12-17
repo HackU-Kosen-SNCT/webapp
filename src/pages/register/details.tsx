@@ -1,8 +1,8 @@
+import { ColorType } from 'color'
 import React, { useState } from 'react'
-import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from 'recoil'
+import { SetterOrUpdater, useSetRecoilState } from 'recoil'
 import tw, { css } from 'twin.macro'
 import { useLocation } from 'wouter'
-import { ColorType } from '../../@types/color'
 import { BackButton, ColorPickerBox, Heading, Progress, TextBox, TextButton } from '../../components'
 import { FixedLayout } from '../../layouts'
 import { RegisterItem, registerItemState } from '../../store'
@@ -22,30 +22,28 @@ export const colors: ColorType[] = [
   '#99FF33',
   '#FFFF33',
   '#FF9933'
-];
+]
 
+// eslint-disable-next-line max-lines-per-function
 const RegisterDetails: React.FC = () => {
   const [, setLocation] = useLocation()
   const [color, setColor] = useState<ColorType>('#FFFFFF')
   const [detail, setDetail] = useState<string>('')
-  const registerItemValue: RegisterItem = useRecoilValue<RegisterItem>(registerItemState);
   const setRegisterItemState: SetterOrUpdater<RegisterItem> = useSetRecoilState(registerItemState)
   const handleSubmit = () => {
-    setRegisterItemState((prevValue: RegisterItem) => {
-      return {
-        category: prevValue.category,
-        color: color,
-        created_at: prevValue.created_at,
-        detail: detail,
-        image_url: prevValue.image_url,
-        item_id: prevValue.item_id
-      }
-    })
+    setRegisterItemState((previousValue: RegisterItem) => ({
+      category: previousValue.category,
+      color,
+      created_at: previousValue.created_at,
+      detail,
+      image_url: previousValue.image_url,
+      item_id: previousValue.item_id
+    }))
     setLocation('/register/photograph')
   }
 
   const onChangeColor = (event: React.FormEvent<HTMLDivElement> | React.ChangeEvent<HTMLInputElement>) => {
-    setColor((event.target as (EventTarget & HTMLInputElement)).id as ColorType);
+    setColor((event.target as (EventTarget & HTMLInputElement)).id as ColorType)
   }
 
   return (

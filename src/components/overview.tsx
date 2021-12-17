@@ -1,12 +1,13 @@
+// eslint-disable-next-line import/no-unresolved
+import { categoryTexts } from 'category'
 import React from 'react'
 import tw from 'twin.macro'
 import { CategoryButton, Color, Text, TextButton } from './'
-import { allowCategories, categoryTexts } from '../@types/category'
 
 type LafOverviewProperties = {
   imageSource: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>['src'],
   category: categoryTexts,
-  detail: string | null
+  details: string | null
   color: string,
   actionLabel: string,
   actionButtonProps: React.ComponentProps<React.ReactHTML['button']>
@@ -15,7 +16,7 @@ type LafOverviewProperties = {
 const LafOverview: React.FC<LafOverviewProperties> = ({
   imageSource,
   category,
-  detail,
+  details,
   color,
   actionLabel,
   actionButtonProps,
@@ -29,12 +30,14 @@ const LafOverview: React.FC<LafOverviewProperties> = ({
     </div>
     <p tw="max-w-xl overflow-hidden truncate text-xl font-semibold">
       {
-        detail ? detail.split('\\n').map((detail, index) => (
-          <>
-            <Text key={index}>{detail}</Text>
-            <br />
-          </>
-        )) : ''
+        details
+          ? details.split('\\n').map((detail, index) => (
+            <>
+              <Text key={index}>{detail}</Text>
+              <br />
+            </>
+          ))
+          : ''
       }
     </p>
     <TextButton {...actionButtonProps}>{actionLabel}</TextButton>

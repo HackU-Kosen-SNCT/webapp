@@ -1,8 +1,9 @@
 import { css } from '@emotion/react'
+// eslint-disable-next-line import/no-unresolved
+import { ColorType } from 'color'
 import { nanoid } from 'nanoid'
 import React from 'react'
 import tw from 'twin.macro'
-import { ColorType } from '../@types/color'
 
 type TextBoxProperties = React.ComponentProps<React.ReactHTML['textarea']>
 

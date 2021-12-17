@@ -10,7 +10,7 @@ import { BackButton, Progress, TextButton } from '../../components'
 import { CenteringLayout } from '../../layouts'
 import { pictureData } from '../../store'
 
-// eslint-disable-next-line max-lines-per-function
+// eslint-disable-next-line max-statements
 const RegisterPhotograph: React.FC = () => {
   const [imageSource, setImageSource] = useState<string>(undrawCamera as string)
   const setPictureDataState: SetterOrUpdater<string> = useSetRecoilState(pictureData)

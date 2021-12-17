@@ -1,7 +1,9 @@
-import { atom } from "recoil"
-import { categoryTexts } from "../@types/category"
-import { ColorType } from "../@types/color"
-import { modaldata } from "../pages/receive/select-laf"
+// eslint-disable-next-line import/no-unresolved
+import { categoryTexts } from 'category'
+// eslint-disable-next-line import/no-unresolved
+import { ColorType } from 'color'
+import { atom } from 'recoil'
+import { modaldata } from '../pages/receive/select-laf'
 
 export type RegisterItem = {
   category: categoryTexts;
@@ -24,32 +26,31 @@ export type ReceiveItem = {
 
 // 落とし物登録時
 export const registerItemState = atom<RegisterItem>({
-  key: 'registerItemState',
   default: {
     category: 'その他',
-    detail: '',
     color: '#FFFFFF',
     created_at: '',
+    detail: '',
     image_url: '',
     item_id: ''
-  }
+  },
+  key: 'registerItemState'
 })
 
 // react-webcamで取得した画像データ
 export const pictureData = atom<string>({
-  key: 'pictureData',
-  default: ''
+  default: '',
+  key: 'pictureData'
 })
-
 
 // 落とし物受け取る時
 export const receiveModalDataState = atom<modaldata>({
-  key: 'receiveLafItemState',
   default: {
     category: 'USBメモリ',
     color: '#FFFFFF',
     detail: '',
     image_url: '',
     item_id: ''
-  }
+  },
+  key: 'receiveLafItemState'
 })
