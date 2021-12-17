@@ -8,7 +8,7 @@ import tw from 'twin.macro'
 import { useLocation } from 'wouter'
 import undrawDogWorking from '../../assets/undraw_dog_walking_re_l61p 1.svg'
 import undrawEmpty from '../../assets/undraw_empty.svg'
-import { BackButton, Modal, Progress, LafShelf, Modalicon } from '../../components'
+import { BackButton, Modal, Progress, LafShelf, Modalicon, Colorcircle } from '../../components'
 import { FixedLayout } from '../../layouts'
 import { receiveModalDataState } from '../../store'
 
@@ -83,6 +83,8 @@ const ReceiveSelectLaf: React.FC = () => {
           <Progress stepLabels={['落とし物選択', '受け取り', '感謝のメッセージを送る']} currentStep={1} />
         </>
       }
+      scrollable
+      autoHeight
     >
       { error
         ? (
@@ -99,7 +101,7 @@ const ReceiveSelectLaf: React.FC = () => {
             </div>
           )
           : (
-            <>
+            <div tw="p-1">
               <div tw="grid grid-cols-3 gap-8">
                 { lafs.map((laf, index) => (
                   <LafShelf
@@ -111,7 +113,7 @@ const ReceiveSelectLaf: React.FC = () => {
                       setModalData({
                         category: laf.category,
                         color: laf.color,
-                        detail: '',
+                        detail: laf.detail as string,
                         image_url: laf.image_url,
                         item_id: laf.item_id
                       })
@@ -127,10 +129,11 @@ const ReceiveSelectLaf: React.FC = () => {
                     この落とし物を受け取りますか?
                   </div>
                   <div tw="w-1/2 m-0 m-auto"><img tw="rounded-xl" alt="落とし物" src={modalData?.image_url}/></div>
-                  <div tw="flex justify-center">
+                  <div tw="flex justify-center items-center space-x-20">
                     <Modalicon category={modalData?.category}/>
+                    <Colorcircle color={modalData?.color} tw="w-12 h-12" />
                   </div>
-                  <div tw="w-full text-center mt-10">{modalData?.detail}</div>
+                  <div tw="w-full text-center mt-10 text-2xl">{modalData?.detail}</div>
                   <div tw="flex justify-center ">
                     <button onClick={handleClick}
                       tw="bg-white w-1/4 mt-10 shadow-custom pl-5 pr-5 pt-4 pb-4 rounded-3xl">
@@ -139,7 +142,7 @@ const ReceiveSelectLaf: React.FC = () => {
                   </div>
                 </div>
               </Modal>
-            </>
+            </div>
           ))}
     </FixedLayout>
   )
