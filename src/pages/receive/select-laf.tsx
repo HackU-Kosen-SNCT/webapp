@@ -105,7 +105,7 @@ const ReceiveSelectLaf: React.FC = () => {
                       setModalData({
                         category: laf.category,
                         color: laf.color,
-                        detail: laf.detail,
+                        detail: '',
                         image_url: laf.image_url,
                         item_id: laf.item_id
                       })

@@ -73,7 +73,7 @@ const RegisterDetails: React.FC = () => {
         </div>
         <div tw="w-full">
           <Heading variant="h3">詳細</Heading>
-          <TextBox onChange={(event) => setDetail(event.target.value)} />
+          <TextBox value={detail} onChange={(event) => setDetail(event.target.value)} />
         </div>
         <TextButton as="input" type="submit" onClick={handleSubmit}>次に進む</TextButton>
       </form>
