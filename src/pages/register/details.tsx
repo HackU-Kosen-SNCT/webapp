@@ -31,7 +31,6 @@ const RegisterDetails: React.FC = () => {
   const registerItemValue: RegisterItem = useRecoilValue<RegisterItem>(registerItemState);
   const setRegisterItemState: SetterOrUpdater<RegisterItem> = useSetRecoilState(registerItemState)
   const handleSubmit = () => {
-    console.log(registerItemValue);
     setRegisterItemState((prevValue: RegisterItem) => {
       return {
         category: prevValue.category,

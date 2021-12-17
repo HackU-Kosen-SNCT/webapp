@@ -5,11 +5,12 @@ import { useRecoilValue } from 'recoil'
 import undrawICanFly from '../../assets/undraw_i_can_fly_-7-egl.svg'
 import { BackButton, LafOverview, Progress } from '../../components'
 import { CenteringLayout } from '../../layouts'
-import { ReceiveItem, receiveLafItemState } from '../../store'
+import { ReceiveItem, receiveModalDataState } from '../../store'
+import { modaldata } from '..'
 
 const ReceiveConfirm: React.FC = () => {
   const [, setLocation] = useLocation()
-  const receiveLafItemValue: ReceiveItem = useRecoilValue<ReceiveItem>(receiveLafItemState)
+  const receiveModalDateValue: modaldata = useRecoilValue<modaldata>(receiveModalDataState)
 
   const handleClick = () => {
     setLocation('/receive/send-letter')
@@ -28,12 +29,11 @@ const ReceiveConfirm: React.FC = () => {
       scrollable
       autoHeight
     >
-      {/* TODO: 仮のデータから変更する */}
       <LafOverview
-        imageSource={receiveLafItemValue.imsge_url}
-        category={receiveLafItemValue.category}
-        detail={receiveLafItemValue.detail}
-        color={receiveLafItemValue.color}
+        imageSource={receiveModalDateValue.image_url}
+        category={receiveModalDateValue.category}
+        detail={receiveModalDateValue.detail}
+        color={receiveModalDateValue.color}
         actionLabel="受け取った!"
         actionButtonProps={{ onClick: handleClick }}
       />

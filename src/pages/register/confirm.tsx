@@ -8,7 +8,7 @@ import { BackButton, Progress, LafOverview } from '../../components'
 import { CenteringLayout } from '../../layouts'
 import { pictureData, RegisterItem, registerItemState } from '../../store'
 import { storage } from '../../firebase';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
+import { ref, uploadBytesResumable, getDownloadURL, uploadString } from 'firebase/storage'
 import { allowCategories, categoryTexts } from '../../@types/category'
 
 export const toAllowCategory = (text: categoryTexts): allowCategories => {
@@ -59,57 +59,65 @@ const RegisterConfirm: React.FC = () => {
   const pictureDataValue: string = useRecoilValue<string>(pictureData)
   const setPictureDataState: SetterOrUpdater<string> = useSetRecoilState(pictureData);
   const handleClick = async () => {
-    // console.log(pictureDataValue)
     // pictureDataValueをfirebase storageに投げてURLに変換する
     const item_id = String(Date.now())
-    const image_url = await uploadImage(new Blob([pictureDataValue], {type: 'image/jpeg'}), item_id)
-    // const requestData = {
-    //   item_id: item_id,
-    //   category: toAllowCategory(registerItemValue.category),
-    //   color:  registerItemValue.color,
-    //   detail: registerItemValue.detail,
-    //   image_url: image_url,
-    //   created_at: new Date().toISOString(),
-    // }
-    // console.log(requestData)
-    // // API access
-    // axios({
-    //   method: 'POST',
-    //   url: 'http://localhost:3001/laf',
-    //   data: requestData,
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     accept: 'application/json'
-    //   },
-    // }).then((res) => {
-    //   console.log(res)
-    //   setLocation('/register/complete')
-    // })
-    //   .catch((error) => {
-    //     console.log(error)
-    //   })
+    const image_url = await uploadImage(pictureDataValue, item_id)
+    const requestData = {
+      item_id: item_id,
+      category: toAllowCategory(registerItemValue.category),
+      color:  registerItemValue.color,
+      detail: registerItemValue.detail,
+      image_url: image_url,
+      created_at: new Date().toISOString(),
+    }
+    console.log(requestData)
+    // API access
+    axios({
+      method: 'POST',
+      url: 'http://localhost:3000/laf',
+      data: requestData,
+      headers: {
+        'Content-Type': 'application/json',
+        accept: 'application/json'
+      },
+    }).then((res) => {
+      console.log(res)
+      setLocation('/register/complete')
+    })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
-  const uploadImage = async (file: Blob | null, item_id: string): Promise<string | null> => {
-    if (!file) return null;
-    const storageRef = ref(storage, `/images/` + item_id + '.jpg');
-    const uploadTask = uploadBytesResumable(storageRef, file);
+  const uploadImage = async (string: string | null, item_id: string): Promise<string | null> => {
+    if (!string) return null;
+    console.log(string);
+    const storageRef = ref(storage, `images/${item_id}.jpeg`);
+    const snapshot = await uploadString(storageRef, string, 'data_url');
     let url = null;
-
-    await uploadTask.on('state_changed', (snapshot) => {
-      console.log(snapshot)
-      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done');
-    }, (error) => {
-      console.log(error)
-    }, () => {
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL: string) => {
-        console.log(downloadURL);
-        url = downloadURL;
-      }).catch((err: any) => {
-        console.log(err)
-      })
+    getDownloadURL(snapshot.ref).then((downloadURL: string) => {
+      console.log(downloadURL);
+      url = downloadURL;
+    }).catch((err: any) => {
+      console.log(err)
     })
+
+    // let url = null;
+
+    // await uploadTask.on('state_changed', (snapshot) => {
+    //   console.log(snapshot)
+    //   var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //   console.log('Upload is ' + progress + '% done');
+    // }, (error) => {
+    //   console.log(error)
+    // }, () => {
+    //   getDownloadURL(uploadTask.snapshot.ref).then((downloadURL: string) => {
+    //     console.log(downloadURL);
+    //     url = downloadURL;
+    //   }).catch((err: any) => {
+    //     console.log(err)
+    //   })
+    // })
     return url;
   }
 
@@ -126,12 +134,11 @@ const RegisterConfirm: React.FC = () => {
       scrollable
       autoHeight
     >
-      {/* TODO: 仮のデータから変更する */}
       <LafOverview
         imageSource={pictureDataValue as string}
         category={registerItemValue.category}
         detail={registerItemValue.detail}
-        color="#000000"
+        color={registerItemValue.color}
         actionLabel="登録する"
         actionButtonProps={{ onClick: handleClick }}
       />

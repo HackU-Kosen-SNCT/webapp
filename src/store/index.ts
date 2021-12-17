@@ -1,6 +1,7 @@
 import { atom } from "recoil"
 import { categoryTexts } from "../@types/category"
 import { ColorType } from "../@types/color"
+import { modaldata } from "../pages/receive/select-laf"
 
 export type RegisterItem = {
   category: categoryTexts;
@@ -41,17 +42,14 @@ export const pictureData = atom<string>({
 })
 
 
-// 落とし物受け取る時のメッセージ
-export const receiveLafItemState = atom<ReceiveItem>({
+// 落とし物受け取る時
+export const receiveModalDataState = atom<modaldata>({
   key: 'receiveLafItemState',
   default: {
-  item_id: '',
-  message: '',
-  received_at: '',
-  category: 'その他',
-  detail: "",
-  color: '#FFFFFF',
-  imsge_url: '',
+    category: 'USBメモリ',
+    color: '#FFFFFF',
+    detail: '',
+    image_url: '',
+    item_id: ''
   }
 })
-

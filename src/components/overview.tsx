@@ -24,7 +24,7 @@ const LafOverview: React.FC<LafOverviewProperties> = ({
   <div tw="flex flex-col items-center space-y-8" {...rest}>
     <img src={imageSource} alt={category} tw="h-60 rounded-3xl" />
     <div tw="w-full flex  items-center justify-evenly">
-      <CategoryButton tw="pointer-events-none">カギ</CategoryButton>
+      <CategoryButton tw="pointer-events-none">{category}</CategoryButton>
       <Color color={color} tw="pointer-events-none" />
     </div>
     <p tw="max-w-xl overflow-hidden truncate text-xl font-semibold">

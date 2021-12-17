@@ -1,23 +1,29 @@
 import axios from 'axios'
+import { useState } from 'preact/hooks'
 import React from 'react'
+import { useRecoilValue } from 'recoil'
 import tw, { css } from 'twin.macro'
 import { useLocation } from 'wouter'
+import { modaldata } from '..'
 import undrawSuperThankYou from '../../assets/undraw_super_thank_you_re_f8bo.svg'
 import { BackButton, Progress, Text, TextBox, TextButton } from '../../components'
 import { FixedLayout } from '../../layouts'
+import { receiveModalDataState } from '../../store'
 
 const ReceiveSendLetter: React.FC = () => {
   const [, setLocation] = useLocation()
+  const [message, setMessage] = useState('')
+  const receiveModalDateValue: modaldata = useRecoilValue(receiveModalDataState)
   const handleClick = () => {
     // TODO: バックエンドとの通信処理を追加
     const requestData = {
-      item_id: String(new Date()),
-      message: 'hogehoge',
+      item_id: receiveModalDateValue.item_id,
+      message: message,
       received_at: new Date().toISOString(),
     }
     axios({
       method: 'PATCH',
-      url: 'http://localhost:3001/laf/receive',
+      url: 'http://localhost:3000/laf/receive',
       data: requestData,
       headers: {
         'Content-Type': 'application/json',
@@ -31,6 +37,10 @@ const ReceiveSendLetter: React.FC = () => {
         console.log(error)
       })
     setLocation('/receive/complete')
+  }
+
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(event.target.value)
   }
 
   return (
@@ -54,7 +64,7 @@ const ReceiveSendLetter: React.FC = () => {
         </span>
         {/* 以下のようにevent.target.idから現在の詳細の値を取得できる */}
         {/* eslint-disable-next-line no-alert */}
-        <TextBox onChange={(event) => alert(event.target.value)} />
+        <TextBox onChange={(e) => handleChange(e)} />
       </div>
       <div tw="w-full flex flex-col items-center">
         <TextButton onClick={handleClick}>メッセージを送信</TextButton>

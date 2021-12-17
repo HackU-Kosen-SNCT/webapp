@@ -1,22 +1,22 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from 'recoil'
-import tw from 'twin.macro'
 import undrawDogWorking from '../../assets/undraw_dog_walking_re_l61p 1.svg'
 import undrawEmpty from '../../assets/undraw_empty.svg'
 import { BackButton, Modal, Progress, LafShelf, Modalicon } from '../../components'
 import { FixedLayout } from '../../layouts'
-import { ReceiveItem, receiveLafItemState } from '../../store'
+import { ReceiveItem, receiveModalDataState } from '../../store'
 import { useLocation } from 'wouter'
+import { categoryTexts, ColorType } from '../../types'
 
-type item = {
+export type item = {
   item_id: string
-  category: string
-  color: string
+  category: categoryTexts
+  color: ColorType
   detail: string | null
   image_url: string
-  created_at: Date
-  received_at: Date | null
+  created_at: string
+  received_at: string | null
 }
 
 type response = {
@@ -25,10 +25,10 @@ type response = {
   }
 }
 
-type modaldata = {
-  category: string
-  color: string
-  detail: string | null
+export type modaldata = {
+  category: categoryTexts
+  color: ColorType
+  detail: string
   image_url: string
   item_id: string
 }
@@ -38,9 +38,9 @@ const ReceiveSelectLaf: React.FC = () => {
   const [lafs, setLafs] = useState<item[]>([])
   const [error, setError] = useState<boolean>(false)
   const [modal, setModal] = useState<boolean>(false)
-  const [modalData, setModalData] = useState<item>()
-  const setReceiveLafItemState: SetterOrUpdater<ReceiveItem> = useSetRecoilState(receiveLafItemState)
+  const [modalData, setModalData] = useState<modaldata>({category: 'その他', color: '#FFFFFF', detail: '', image_url: '', item_id: ''})
   const [, setLocation] = useLocation()
+  const setReceiveModalData: SetterOrUpdater<modaldata> = useSetRecoilState(receiveModalDataState)
 
   useEffect(() => {
     axios({
@@ -62,18 +62,8 @@ const ReceiveSelectLaf: React.FC = () => {
 
   const handleClick = () => {
     // storeに値を突っ込む
-    setReceiveLafItemState((prevValue: ReceiveItem) => {
-      // return {
-      //   // item_id: modalData!.item_id,
-      //   // message: prevValue.message,
-      //   // received_at: prevValue.received_at,
-      //   // category: modalData!.category,
-      //   // detail: modalData!.detail,
-      //   // color: modalData!.color,
-      //   // imsge_url: modalData!.image_url,
-      // }
-      return prevValue
-    })
+    setReceiveModalData(modalData)
+
     // モーダルの解除
     setModal(false)
     //遷移
@@ -114,7 +104,13 @@ const ReceiveSelectLaf: React.FC = () => {
                     color={laf.color}
                     onClick={() => {
                       setModal(true)
-                      setModalData(laf)
+                      setModalData({
+                        category: laf.category,
+                        color: laf.color,
+                        detail: '',
+                        image_url: laf.image_url,
+                        item_id: laf.item_id
+                      })
                     }}
                     key={index}
                   />
