@@ -41,7 +41,7 @@ const Colorcircle: React.VFC<ColorProperties> = ({ color }) => (
 )
 
 type LafShelfProperties = {
-  category : categoryTexts
+  category : string
   imgurl : string
   color : string
   onClick: React.MouseEventHandler<HTMLDivElement>
