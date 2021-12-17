@@ -10,21 +10,13 @@ import { BackButton, Progress, TextButton } from '../../components'
 import { CenteringLayout } from '../../layouts'
 import { pictureData } from '../../store'
 
-const videoConstraints = {
-  facingMode: { exact: 'environment' },
-  height: 360,
-  width: 720
-}
-
 // eslint-disable-next-line max-lines-per-function
 const RegisterPhotograph: React.FC = () => {
   const [imageSource, setImageSource] = useState<string>(undrawCamera as string)
-
   const setPictureDataState: SetterOrUpdater<string> = useSetRecoilState(pictureData)
-
   const [, setLocation] = useLocation()
-
   const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false)
+  const [isWebcamSelfie, setIsWebcamSelfie] = useState<boolean>(false)
   const webcamReference = React.useRef<Webcam>(null)
   const [, setUrl] = useState<string | null>()
   const capture = React.useCallback(
@@ -37,6 +29,12 @@ const RegisterPhotograph: React.FC = () => {
     },
     [webcamReference]
   )
+
+  const videoConstraints = {
+    facingMode: isWebcamSelfie ? 'user' : { exact: 'environment' },
+    height: 360,
+    width: 720
+  }
 
   /*
    * 写真のdata urlを取得できるのでどこか（storeなりurlパラメータなり）にぶちこむ
@@ -83,6 +81,9 @@ const RegisterPhotograph: React.FC = () => {
         )}
         {isCaptureEnable && (
           <>
+            <TextButton as="label" onClick={() => setIsWebcamSelfie(!isWebcamSelfie)}>
+              {'カメラ反転'}
+            </TextButton>
             <div>
               <Webcam
                 audio={false}
