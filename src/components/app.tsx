@@ -1,13 +1,13 @@
 import { css, Global } from '@emotion/react'
 import React from 'react'
+import { RecoilRoot } from 'recoil'
 import { GlobalStyles } from 'twin.macro'
 import { useRegisterSW } from 'virtual:pwa-register/react'
 import { Switch, Route, Redirect } from 'wouter'
 import * as pages from '../pages'
-import { RecoilRoot } from 'recoil'
 
 const customStyles = css`
-  * {
+  :not(input):not(textarea){
     user-select: none;
   }
   img {
