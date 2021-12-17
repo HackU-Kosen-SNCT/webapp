@@ -33,7 +33,6 @@ type modaldata = {
   image_url: string
 }
 
-// TODO: このページを完成させる
 // eslint-disable-next-line max-lines-per-function
 const Lafs: React.FC = () => {
   const [lafs, setLafs] = useState<item[]>([])
