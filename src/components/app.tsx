@@ -1,10 +1,11 @@
 import { css, Global } from '@emotion/react'
 import React from 'react'
+import { RecoilRoot } from 'recoil'
 import { GlobalStyles } from 'twin.macro'
+// eslint-disable-next-line import/no-unresolved
 import { useRegisterSW } from 'virtual:pwa-register/react'
 import { Switch, Route, Redirect } from 'wouter'
 import * as pages from '../pages'
-import { RecoilRoot } from 'recoil'
 
 const customStyles = css`
   * {

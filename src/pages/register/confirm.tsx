@@ -1,121 +1,68 @@
 import axios from 'axios'
+import { ref, getDownloadURL, uploadString } from 'firebase/storage'
 import React from 'react'
 import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from 'recoil'
 import tw, { css } from 'twin.macro'
 import { useLocation } from 'wouter'
-import undrawICanFly from '../../assets/undraw_i_can_fly_-7-egl.svg'
 import { BackButton, Progress, LafOverview } from '../../components'
+import { storage } from '../../firebase'
 import { CenteringLayout } from '../../layouts'
 import { pictureData, RegisterItem, registerItemState } from '../../store'
-import { storage } from '../../firebase';
-import { ref, uploadBytesResumable, getDownloadURL, uploadString } from 'firebase/storage'
-import { allowCategories, categoryTexts } from '../../@types/category'
+import { toAllowCategory } from '../../utils'
 
-export const toAllowCategory = (text: categoryTexts): allowCategories => {
-  switch (text) {
-    case '財布':
-      return 'wallet';
-      break;
-    case 'スマホ':
-      return 'smartPhone';
-      break;
-    case '水筒':
-      return 'waterBottle';
-      break;
-    case '文房具':
-      return 'stationery';
-      break;
-    case 'カギ':
-      return 'key';
-      break;
-    case 'USBメモリ':
-      return 'usb';
-      break;
-    case '教科書・ノート・ファイル':
-      return 'textbook/notebook/file';
-      break;
-    case 'イヤホン':
-      return 'earphone';
-      break;
-    case '関数電卓':
-      return 'calculator';
-      break;
-    case '傘':
-      return 'umbrella';
-      break;
-    case '衣料品':
-      return 'clothing';
-      break;
-    case 'その他':
-      return 'others';
-      break;
-  }
+const uploadImage = async (string: string | null, itemId: string): Promise<string | null> => {
+  // eslint-disable-next-line unicorn/no-null
+  if (!string) return null
+  const storageReference = ref(storage, `images/${itemId}.jpeg`)
+  const snapshot = await uploadString(storageReference, string, 'data_url')
+  return getDownloadURL(snapshot.ref).then((downloadURL: string) => downloadURL)
+    // eslint-disable-next-line unicorn/no-null
+    .catch(() => null)
 }
 
+// eslint-disable-next-line max-lines-per-function
 const RegisterConfirm: React.FC = () => {
   const [, setLocation] = useLocation()
   const registerItemValue: RegisterItem = useRecoilValue<RegisterItem>(registerItemState)
   const setRegisterItemState: SetterOrUpdater<RegisterItem> = useSetRecoilState(registerItemState)
   const pictureDataValue: string = useRecoilValue<string>(pictureData)
-  const setPictureDataState: SetterOrUpdater<string> = useSetRecoilState(pictureData);
   const handleClick = async () => {
-    // pictureDataValueをfirebase storageに投げてURLに変換する
-    const item_id = String(Date.now())
-    const image_url = await uploadImage(pictureDataValue, item_id)
-
-    if (!image_url) {
-      // null 
-      return;
+    const itemId = String(Date.now())
+    const imageUrl = await uploadImage(pictureDataValue, itemId)
+    if (!imageUrl) {
+      return
     }
     const requestData = {
-      item_id: item_id,
       category: toAllowCategory(registerItemValue.category),
-      color:  registerItemValue.color,
-      detail: registerItemValue.detail,
-      image_url: image_url,
+      color: registerItemValue.color,
       created_at: new Date().toISOString(),
+      detail: registerItemValue.detail,
+      image_url: imageUrl,
+      item_id: itemId
     }
 
-    setRegisterItemState((prevValue) => {
-      return {
-        item_id: item_id,
-        category: prevValue.category,
-        color: prevValue.color,
-        detail: prevValue.detail,
-        image_url: image_url!,
-        created_at: requestData.created_at
-      }
-    })
-    
-    // API access
+    setRegisterItemState((previousValue) => ({
+      category: previousValue.category,
+      color: previousValue.color,
+      created_at: requestData.created_at,
+      detail: previousValue.detail,
+      image_url: imageUrl,
+      item_id: itemId
+    }))
+
     axios({
-      method: 'POST',
-      url: 'http://localhost:3000/laf',
       data: requestData,
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json'
       },
-    }).then((res) => {
-      console.log(res)
+      method: 'POST',
+      url: 'http://localhost:3000/laf'
+    }).then(() => {
       setLocation('/register/complete')
     })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-  const uploadImage = async (string: string | null, item_id: string): Promise<string | null> => {
-    if (!string) return null;
-    const storageRef = ref(storage, `images/${item_id}.jpeg`);
-    const snapshot = await uploadString(storageRef, string, 'data_url')
-    return getDownloadURL(snapshot.ref).then((downloadURL: string) => {
-      console.log(downloadURL);
-      return downloadURL;
-    }).catch((err: any) => {
-      console.log(err)
-      return null;
-    })
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      .catch(() => {})
   }
 
   return (
@@ -132,9 +79,9 @@ const RegisterConfirm: React.FC = () => {
       autoHeight
     >
       <LafOverview
-        imageSource={pictureDataValue as string}
+        imageSource={pictureDataValue }
         category={registerItemValue.category}
-        detail={registerItemValue.detail}
+        details={registerItemValue.detail}
         color={registerItemValue.color}
         actionLabel="登録する"
         actionButtonProps={{ onClick: handleClick }}

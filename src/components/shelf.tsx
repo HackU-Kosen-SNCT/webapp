@@ -1,10 +1,11 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { css } from '@emotion/react'
+// eslint-disable-next-line import/no-unresolved
+import { categoryTexts } from 'category'
 import React from 'react'
 import tw from 'twin.macro'
 import { CategoryButton } from './'
-import { categoryTexts } from '../@types/category'
 
 /*
  * TODO: カテゴリの名前しか設定できないようになっているので見直す必要あり

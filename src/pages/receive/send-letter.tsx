@@ -10,29 +10,30 @@ import { BackButton, Progress, Text, TextBox, TextButton } from '../../component
 import { FixedLayout } from '../../layouts'
 import { receiveModalDataState } from '../../store'
 
+// eslint-disable-next-line max-lines-per-function
 const ReceiveSendLetter: React.FC = () => {
   const [, setLocation] = useLocation()
-  const [message, setMessage] = useState('')
+  const [Message, setMessage] = useState('')
   const receiveModalDateValue: modaldata = useRecoilValue(receiveModalDataState)
   const handleClick = () => {
     const requestData = {
       item_id: receiveModalDateValue.item_id,
-      message: message,
-      received_at: new Date().toISOString(),
+      message: Message,
+      received_at: new Date().toISOString()
     }
     axios({
-      method: 'PATCH',
-      url: 'http://localhost:3000/laf/receive',
       data: requestData,
       headers: {
         'Content-Type': 'application/json',
         accept: 'application/json'
       },
-    }).then((res) => {
+      method: 'PATCH',
+      url: 'http://localhost:3000/laf/receive'
+    }).then(() => {
       setLocation('/register/complete')
     })
-      .catch((error) => {
-      })
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      .catch(() => {})
     setLocation('/receive/complete')
   }
 
@@ -59,7 +60,7 @@ const ReceiveSendLetter: React.FC = () => {
         <span tw="absolute -top-6 left-4 text-deepgrey text-sm">
         書いたメッセージは、LINE Botを通じて、拾ってくれた本人の元に届きます。
         </span>
-        <TextBox onChange={(e) => handleChange(e)} />
+        <TextBox onChange={(message) => handleChange(message)} />
       </div>
       <div tw="w-full flex flex-col items-center">
         <TextButton onClick={handleClick}>メッセージを送信</TextButton>

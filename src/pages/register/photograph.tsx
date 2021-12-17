@@ -1,44 +1,45 @@
-import React, { useCallback, useRef, useState } from 'react'
-import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from 'recoil'
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable max-lines-per-function */
+import React, { useRef, useState } from 'react'
+import Webcam from 'react-webcam'
+import { SetterOrUpdater, useSetRecoilState } from 'recoil'
 import tw, { css } from 'twin.macro'
 import { useLocation } from 'wouter'
 import undrawCamera from '../../assets/undraw_camera_re_cnp4.svg'
 import { BackButton, Progress, TextButton } from '../../components'
 import { CenteringLayout } from '../../layouts'
 import { pictureData, RegisterItem, registerItemState } from '../../store'
-import Webcam from 'react-webcam'
 
 const videoConstraints = {
-  width: 720,
+  facingMode: 'user',
   height: 360,
-  facingMode: 'user'
+  width: 720
 }
 
-// eslint-disable-next-line max-lines-per-function
+// eslint-disable-next-line max-statements
 const RegisterPhotograph: React.FC = () => {
   const [imageSource, setImageSource] = useState<string>(undrawCamera as string)
   const inputElement = useRef<HTMLInputElement>(null)
-  let registerItemValue: RegisterItem = useRecoilValue<RegisterItem>(registerItemState);
   const setRegisterItemState: SetterOrUpdater<RegisterItem> = useSetRecoilState(registerItemState)
 
-
-  const setPictureDataState: SetterOrUpdater<string> = useSetRecoilState(pictureData);
+  const setPictureDataState: SetterOrUpdater<string> = useSetRecoilState(pictureData)
 
   const [, setLocation] = useLocation()
 
-  const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false);
-  const webcamRef = React.useRef<Webcam>(null);
-  const [url, setUrl] = useState<string | null>(null);
+  const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false)
+  const webcamReference = React.useRef<Webcam>(null)
+  // eslint-disable-next-line unicorn/no-null
+  const [url, setUrl] = useState<string | null>(null)
   const capture = React.useCallback(
     () => {
-      const imageSrc = webcamRef.current?.getScreenshot();
-      if (imageSrc) {
-        setUrl(imageSrc)
-        setImageSource(imageSrc)
+      const imageReference = webcamReference.current?.getScreenshot()
+      if (imageReference) {
+        setUrl(imageReference)
+        setImageSource(imageReference)
       }
     },
-    [webcamRef]
-  );
+    [webcamReference]
+  )
 
   // 写真のdata urlを取得できるのでどこか（storeなりurlパラメータなり）にぶちこむ
   const handleChange = () => {
@@ -50,16 +51,14 @@ const RegisterPhotograph: React.FC = () => {
       }
       reader.readAsDataURL(file)
     }
-    setRegisterItemState((prevValue) => {
-      return {
-        category: prevValue.category,
-        color: prevValue.color,
-        created_at: prevValue.created_at,
-        detail: prevValue.detail,
-        image_url: imageSource,
-        item_id: prevValue.item_id
-      }
-    })
+    setRegisterItemState((previousValue) => ({
+      category: previousValue.category,
+      color: previousValue.color,
+      created_at: previousValue.created_at,
+      detail: previousValue.detail,
+      image_url: imageSource,
+      item_id: previousValue.item_id
+    }))
   }
 
   const handleSubmit = () => {
@@ -84,19 +83,19 @@ const RegisterPhotograph: React.FC = () => {
           <img src={imageSource} alt="写真を取る" tw="h-60 mb-8 rounded-3xl" />
         )}
         {isCaptureEnable && (
-        <>
-          <div>
-            <Webcam
-              audio={false}
-              width={540}
-              height={360}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              videoConstraints={videoConstraints}
-            />
-          </div>
-        </>
-      )}
+          <>
+            <div>
+              <Webcam
+                audio={false}
+                width={540}
+                height={360}
+                ref={webcamReference}
+                screenshotFormat="image/jpeg"
+                videoConstraints={videoConstraints}
+              />
+            </div>
+          </>
+        )}
         <div tw="space-x-8">
           {isCaptureEnable || (
             <TextButton as="label" onClick={() => setCaptureEnable(true)}>

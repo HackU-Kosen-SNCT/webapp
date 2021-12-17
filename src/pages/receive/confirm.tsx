@@ -1,12 +1,11 @@
 import React from 'react'
+import { useRecoilValue } from 'recoil'
 import tw, { css } from 'twin.macro'
 import { useLocation } from 'wouter'
-import { useRecoilValue } from 'recoil'
-import undrawICanFly from '../../assets/undraw_i_can_fly_-7-egl.svg'
+import { modaldata } from '..'
 import { BackButton, LafOverview, Progress } from '../../components'
 import { CenteringLayout } from '../../layouts'
-import { ReceiveItem, receiveModalDataState } from '../../store'
-import { modaldata } from '..'
+import { receiveModalDataState } from '../../store'
 
 const ReceiveConfirm: React.FC = () => {
   const [, setLocation] = useLocation()
@@ -32,7 +31,7 @@ const ReceiveConfirm: React.FC = () => {
       <LafOverview
         imageSource={receiveModalDateValue.image_url}
         category={receiveModalDateValue.category}
-        detail={receiveModalDateValue.detail}
+        details={receiveModalDateValue.detail}
         color={receiveModalDateValue.color}
         actionLabel="受け取った!"
         actionButtonProps={{ onClick: handleClick }}

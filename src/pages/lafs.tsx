@@ -1,4 +1,7 @@
 import axios from 'axios'
+// eslint-disable-next-line import/no-unresolved
+import { categoryTexts } from 'category'
+import { ColorType } from 'color'
 import { useState } from 'preact/hooks'
 import React, { useEffect } from 'react'
 import tw from 'twin.macro'
@@ -9,12 +12,12 @@ import { FixedLayout } from '../layouts'
 
 type item = {
   item_id: string
-  category: string
-  color: string
+  category: categoryTexts
+  color: ColorType
   detail: string | null
   image_url: string
-  created_at: Date
-  received_at: Date | null
+  created_at: string
+  received_at: string | null
 }
 
 type response = {
@@ -24,8 +27,8 @@ type response = {
 }
 
 type modaldata = {
-  category: string
-  color: string
+  category: categoryTexts
+  color: ColorType
   detail: string | null
   image_url: string
 }

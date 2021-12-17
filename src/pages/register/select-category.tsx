@@ -1,8 +1,9 @@
+// eslint-disable-next-line import/no-unresolved
+import { categoryTexts } from 'category'
 import React from 'react'
-import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from 'recoil'
+import { SetterOrUpdater, useSetRecoilState } from 'recoil'
 import tw from 'twin.macro'
 import { useLocation } from 'wouter'
-import { categoryTextArray, categoryTexts } from '../../@types/category'
 import { BackButton, CategoryShelf, Progress } from '../../components'
 import { FixedLayout } from '../../layouts'
 import { RegisterItem, registerItemState } from '../../store'
@@ -10,21 +11,18 @@ import { RegisterItem, registerItemState } from '../../store'
 // eslint-disable-next-line max-lines-per-function
 const RegisterSelectCategory: React.FC = () => {
   const [, setLocation] = useLocation()
-  let registerItemValue: RegisterItem = useRecoilValue<RegisterItem>(registerItemState);
   const setRegisterItemState: SetterOrUpdater<RegisterItem> = useSetRecoilState(registerItemState)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     // storeにカテゴリをぶち込む
-    const category = (event.target as (Element & { textContent: string })).textContent as categoryTexts;
-    setRegisterItemState((prevValue: RegisterItem) => {
-      return {
-        category: category,
-        color: prevValue.color,
-        created_at: prevValue.created_at,
-        detail: prevValue.detail,
-        image_url: prevValue.image_url,
-        item_id: prevValue.item_id
-      }
-    })
+    const category = (event.target as (Element & { textContent: string })).textContent as categoryTexts
+    setRegisterItemState((previousValue: RegisterItem) => ({
+      category,
+      color: previousValue.color,
+      created_at: previousValue.created_at,
+      detail: previousValue.detail,
+      image_url: previousValue.image_url,
+      item_id: previousValue.item_id
+    }))
     setLocation('/register/details')
   }
   return (
