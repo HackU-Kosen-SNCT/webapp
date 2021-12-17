@@ -1,12 +1,17 @@
 import React from 'react'
 import tw, { css } from 'twin.macro'
 import { useLocation } from 'wouter'
+import { useRecoilValue } from 'recoil'
 import undrawICanFly from '../../assets/undraw_i_can_fly_-7-egl.svg'
 import { BackButton, LafOverview, Progress } from '../../components'
 import { CenteringLayout } from '../../layouts'
+import { ReceiveItem, receiveModalDataState } from '../../store'
+import { modaldata } from '..'
 
 const ReceiveConfirm: React.FC = () => {
   const [, setLocation] = useLocation()
+  const receiveModalDateValue: modaldata = useRecoilValue<modaldata>(receiveModalDataState)
+
   const handleClick = () => {
     setLocation('/receive/send-letter')
   }
@@ -24,12 +29,11 @@ const ReceiveConfirm: React.FC = () => {
       scrollable
       autoHeight
     >
-      {/* TODO: 仮のデータから変更する */}
       <LafOverview
-        imageSource={undrawICanFly as string}
-        category="カギ"
-        description="キーホルダーがついています。\nTextTextText"
-        color="#000000"
+        imageSource={receiveModalDateValue.image_url}
+        category={receiveModalDateValue.category}
+        detail={receiveModalDateValue.detail}
+        color={receiveModalDateValue.color}
         actionLabel="受け取った!"
         actionButtonProps={{ onClick: handleClick }}
       />
