@@ -28,7 +28,7 @@ const ReceiveSendLetter: React.FC = () => {
         accept: 'application/json'
       },
       method: 'PATCH',
-      url: 'http://localhost:3000/laf/receive'
+      url: 'https://togather-api.takumma.net/laf/receive'
     }).then(() => {
       setLocation('/register/complete')
     })
