@@ -34,7 +34,6 @@ const ReceiveSendLetter: React.FC = () => {
     })
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       .catch(() => {})
-    setLocation('/receive/complete')
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
