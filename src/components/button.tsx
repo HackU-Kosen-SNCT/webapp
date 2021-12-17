@@ -1,4 +1,6 @@
+import { SerializedStyles } from '@emotion/react'
 import React from 'react'
+import { IconType } from 'react-icons'
 import tw from 'twin.macro'
 
 const ButtonContainerBase =
@@ -24,16 +26,25 @@ const ImageButton: React.FC<ImageButtonProperties> = ({ src, children, imgProps,
   </ImageButtonContainer>
 )
 
-const CategoryButtonContainer = tw(ButtonContainerBase)`p-4 rounded-3xl`
+const CategoryButtonContainer =
+  tw(ButtonContainerBase)`p-4 flex flex-col items-center justify-center rounded-3xl space-y-4`
 
-type CategoryButtonProperties = React.ComponentProps<React.ReactHTML['button']>
+type CategoryButtonProperties = React.ComponentProps<React.ReactHTML['button']> & {
+  icon?: IconType,
+  iconStyles?: SerializedStyles
+}
 
 // TODO: アイコンを設定できるようにする（進捗によっては切り捨ててもいいかも）
-const CategoryButton: React.FC<CategoryButtonProperties> = ({ children, ...rest }) => (
-  <CategoryButtonContainer {...rest}>
-    {children}
-  </CategoryButtonContainer>
-)
+const CategoryButton: React.FC<CategoryButtonProperties> = ({ children, icon, iconStyles, ...rest }) => {
+  const Icon = icon
+
+  return (
+    <CategoryButtonContainer {...rest}>
+      {Icon && <Icon css={iconStyles} />}
+      <span>{children}</span>
+    </CategoryButtonContainer>
+  )
+}
 
 const BackButtonContainer =
   tw(ButtonContainerBase)`
