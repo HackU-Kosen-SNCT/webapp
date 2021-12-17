@@ -1,9 +1,9 @@
 // eslint-disable-next-line import/no-unresolved
-import { categoryTexts } from 'category'
 import React from 'react'
 import { SetterOrUpdater, useSetRecoilState } from 'recoil'
 import tw from 'twin.macro'
 import { useLocation } from 'wouter'
+import { categoryTexts } from '../../category'
 import { BackButton, CategoryShelf, Progress } from '../../components'
 import { FixedLayout } from '../../layouts'
 import { RegisterItem, registerItemState } from '../../store'
@@ -43,14 +43,14 @@ const RegisterSelectCategory: React.FC = () => {
        * CategoryShelfコンポーネントのコメントは要チェック
        */}
       <div tw="mx-12 space-y-16">
-        <CategoryShelf mainLabel="貴重品" subLabels={['財布', 'スマホ', 'カギ']} onClick={handleClick} />
+        <CategoryShelf label="貴重品" categoryLabels={['財布', 'スマホ', 'カギ']} onClick={handleClick} />
         <CategoryShelf
-          mainLabel="勉強"
-          subLabels={['文房具', '教科書・ノート・ファイル', '関数電卓']}
+          label="勉強"
+          categoryLabels={['文房具', '教科書・ノート・ファイル', '関数電卓']}
           onClick={handleClick}
         />
-        <CategoryShelf mainLabel="電子機器" subLabels={['USBメモリ', 'イヤホン']} onClick={handleClick} />
-        <CategoryShelf mainLabel="その他" subLabels={['水筒', '衣料品', '傘', 'その他']} onClick={handleClick} />
+        <CategoryShelf label="電子機器" categoryLabels={['USBメモリ', 'イヤホン']} onClick={handleClick} />
+        <CategoryShelf label="その他" categoryLabels={['水筒', '衣料品', '傘', 'その他']} onClick={handleClick} />
       </div>
     </FixedLayout>
   )

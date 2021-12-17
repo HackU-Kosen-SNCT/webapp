@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react'
 import tw, { css } from 'twin.macro'
-import { allowCategories, categories, categoryTexts, toAllowCategory } from '../category'
+import { categories, categoryTexts, toAllowCategory } from '../category'
 import { CategoryButton } from './'
 
 type CategoryShelfProperties = {
@@ -17,7 +17,7 @@ const CategoryShelf: React.FC<CategoryShelfProperties> = ({ label, categoryLabel
     <div tw="grid grid-cols-4 gap-x-12 gap-y-8">
       {
         categoryLabels.map((categoryLabel, index) => {
-          const category = categories[toAllowCategory(categoryLabel) as allowCategories]
+          const category = categories[toAllowCategory(categoryLabel)]
 
           return (
             <CategoryButton
