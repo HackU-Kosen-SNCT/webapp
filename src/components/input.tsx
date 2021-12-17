@@ -8,7 +8,7 @@ type TextBoxProperties = React.ComponentProps<React.ReactHTML['textarea']>
 
 type ColorPickerBoxProperties = React.ComponentProps<React.ReactHTML['div']> & {
   colors: ColorType[];
-  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TextBox: React.FC<TextBoxProperties> = (properties) => (
