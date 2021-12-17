@@ -6,7 +6,6 @@ import undrawDogWorking from '../assets/undraw_dog_walking_re_l61p 1.svg'
 import undrawEmpty from '../assets/undraw_empty.svg'
 import { BackButton, LafShelf, Modal, Modalicon } from '../components'
 import { FixedLayout } from '../layouts'
-import { toCategoryText } from '../@types/category'
 
 type item = {
   item_id: string
@@ -84,7 +83,7 @@ const Lafs: React.FC = () => {
               <div tw="grid grid-cols-3 gap-8">
                 { lafs.map((laf, index) => (
                   <LafShelf
-                    category={toCategoryText(laf.category)}
+                    category={laf.category}
                     imgurl={laf.image_url}
                     color={laf.color}
                     onClick={() => {
