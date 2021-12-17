@@ -1,6 +1,5 @@
-// 登録時に設定できるカラータイプ
-
-export type ColorType =
+declare module 'color' {
+  export type ColorType =
   | '#FFFFFF'
   | '#02331B'
   | '#999999'
@@ -14,4 +13,5 @@ export type ColorType =
   | '#33FF33'
   | '#99FF33'
   | '#FFFF33'
-  | '#FF9933';
+  | '#FF9933'
+}
