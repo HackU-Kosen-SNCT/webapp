@@ -62,6 +62,11 @@ const RegisterConfirm: React.FC = () => {
     // pictureDataValueをfirebase storageに投げてURLに変換する
     const item_id = String(Date.now())
     const image_url = await uploadImage(pictureDataValue, item_id)
+
+    if (!image_url) {
+      // null 
+      return;
+    }
     const requestData = {
       item_id: item_id,
       category: toAllowCategory(registerItemValue.category),
@@ -70,7 +75,18 @@ const RegisterConfirm: React.FC = () => {
       image_url: image_url,
       created_at: new Date().toISOString(),
     }
-    console.log(requestData)
+
+    setRegisterItemState((prevValue) => {
+      return {
+        item_id: item_id,
+        category: prevValue.category,
+        color: prevValue.color,
+        detail: prevValue.detail,
+        image_url: image_url!,
+        created_at: requestData.created_at
+      }
+    })
+    
     // API access
     axios({
       method: 'POST',
@@ -91,34 +107,15 @@ const RegisterConfirm: React.FC = () => {
 
   const uploadImage = async (string: string | null, item_id: string): Promise<string | null> => {
     if (!string) return null;
-    console.log(string);
     const storageRef = ref(storage, `images/${item_id}.jpeg`);
-    const snapshot = await uploadString(storageRef, string, 'data_url');
-    let url = null;
-    getDownloadURL(snapshot.ref).then((downloadURL: string) => {
+    const snapshot = await uploadString(storageRef, string, 'data_url')
+    return getDownloadURL(snapshot.ref).then((downloadURL: string) => {
       console.log(downloadURL);
-      url = downloadURL;
+      return downloadURL;
     }).catch((err: any) => {
       console.log(err)
+      return null;
     })
-
-    // let url = null;
-
-    // await uploadTask.on('state_changed', (snapshot) => {
-    //   console.log(snapshot)
-    //   var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //   console.log('Upload is ' + progress + '% done');
-    // }, (error) => {
-    //   console.log(error)
-    // }, () => {
-    //   getDownloadURL(uploadTask.snapshot.ref).then((downloadURL: string) => {
-    //     console.log(downloadURL);
-    //     url = downloadURL;
-    //   }).catch((err: any) => {
-    //     console.log(err)
-    //   })
-    // })
-    return url;
   }
 
   return (
