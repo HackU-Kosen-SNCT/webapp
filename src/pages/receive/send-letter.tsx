@@ -15,7 +15,6 @@ const ReceiveSendLetter: React.FC = () => {
   const [message, setMessage] = useState('')
   const receiveModalDateValue: modaldata = useRecoilValue(receiveModalDataState)
   const handleClick = () => {
-    // TODO: バックエンドとの通信処理を追加
     const requestData = {
       item_id: receiveModalDateValue.item_id,
       message: message,
@@ -30,11 +29,9 @@ const ReceiveSendLetter: React.FC = () => {
         accept: 'application/json'
       },
     }).then((res) => {
-      console.log(res)
       setLocation('/register/complete')
     })
       .catch((error) => {
-        console.log(error)
       })
     setLocation('/receive/complete')
   }
@@ -62,8 +59,6 @@ const ReceiveSendLetter: React.FC = () => {
         <span tw="absolute -top-6 left-4 text-deepgrey text-sm">
         書いたメッセージは、LINE Botを通じて、拾ってくれた本人の元に届きます。
         </span>
-        {/* 以下のようにevent.target.idから現在の詳細の値を取得できる */}
-        {/* eslint-disable-next-line no-alert */}
         <TextBox onChange={(e) => handleChange(e)} />
       </div>
       <div tw="w-full flex flex-col items-center">
