@@ -1,6 +1,5 @@
 import axios from 'axios'
 // eslint-disable-next-line import/no-unresolved
-import { categoryTexts } from 'category'
 import { ColorType } from 'color'
 import React, { useEffect, useState } from 'react'
 import { SetterOrUpdater, useSetRecoilState } from 'recoil'
@@ -8,7 +7,8 @@ import tw from 'twin.macro'
 import { useLocation } from 'wouter'
 import undrawDogWorking from '../../assets/undraw_dog_walking_re_l61p 1.svg'
 import undrawEmpty from '../../assets/undraw_empty.svg'
-import { BackButton, Modal, Progress, LafShelf, Modalicon, Colorcircle } from '../../components'
+import { categoryTexts } from '../../category'
+import { BackButton, Modal, Progress, LafShelf, Colorcircle } from '../../components'
 import { FixedLayout } from '../../layouts'
 import { receiveModalDataState } from '../../store'
 

@@ -1,8 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
-import { categoryTexts } from 'category'
-// eslint-disable-next-line import/no-unresolved
 import { ColorType } from 'color'
 import { atom } from 'recoil'
+import { categoryTexts } from '../category'
 import { modaldata } from '../pages/receive/select-laf'
 
 export type RegisterItem = {

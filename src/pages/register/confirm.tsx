@@ -4,11 +4,11 @@ import React from 'react'
 import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from 'recoil'
 import tw, { css } from 'twin.macro'
 import { useLocation } from 'wouter'
+import { toAllowCategory } from '../../category'
 import { BackButton, Progress, LafOverview } from '../../components'
 import { storage } from '../../firebase'
 import { CenteringLayout } from '../../layouts'
 import { pictureData, RegisterItem, registerItemState } from '../../store'
-import { toAllowCategory } from '../../utils'
 
 const uploadImage = async (string: string | null, itemId: string): Promise<string | null> => {
   // eslint-disable-next-line unicorn/no-null
