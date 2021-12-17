@@ -34,7 +34,6 @@ type CategoryButtonProperties = React.ComponentProps<React.ReactHTML['button']> 
   iconStyles?: SerializedStyles
 }
 
-// TODO: アイコンを設定できるようにする（進捗によっては切り捨ててもいいかも）
 const CategoryButton: React.FC<CategoryButtonProperties> = ({ children, icon, iconStyles, ...rest }) => {
   const Icon = icon
 
