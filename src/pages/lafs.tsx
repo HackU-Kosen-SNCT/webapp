@@ -7,7 +7,7 @@ import React, { useEffect } from 'react'
 import tw from 'twin.macro'
 import undrawDogWorking from '../assets/undraw_dog_walking_re_l61p 1.svg'
 import undrawEmpty from '../assets/undraw_empty.svg'
-import { BackButton, LafShelf, Modal, Modalicon } from '../components'
+import { BackButton, Colorcircle, LafShelf, Modal, Modalicon } from '../components'
 import { FixedLayout } from '../layouts'
 
 type item = {
@@ -39,7 +39,12 @@ const Lafs: React.FC = () => {
   const [lafs, setLafs] = useState<item[]>([])
   const [error, setError] = useState<boolean>(false)
   const [modal, setModal] = useState<boolean>(false)
-  const [modalData, setModalData] = useState<modaldata>()
+  const [modalData, setModalData] = useState<modaldata>({
+    category: 'その他',
+    color: '#FFFFFF',
+    detail: '',
+    image_url: ''
+  })
 
   useEffect(() => {
     axios({
@@ -66,6 +71,8 @@ const Lafs: React.FC = () => {
           <BackButton />
         </>
       }
+      scrollable
+      autoHeight
     >
       { error
         ? (
@@ -103,22 +110,13 @@ const Lafs: React.FC = () => {
                 ))}
               </div>
               <Modal active={modal} onClick={() => setModal(false)}>
-                <div tw="w-1/2 h-3/4 bg-lightgrey2 rounded-xl">
-                  <div tw="w-full mt-14 mb-6 text-center text-primarydeep
-                            text-3xl font-semibold underline">
-                    この落とし物を受け取りますか?
-                  </div>
-                  <div tw="w-1/2 m-0 m-auto"><img tw="rounded-xl" alt="落とし物の画像" src={modalData?.image_url}/></div>
-                  <div tw="flex justify-center">
+                <div tw="w-1/2 py-8 bg-lightgrey2 rounded-xl">
+                  <div tw="w-1/2 m-0 m-auto"><img tw="rounded-xl mt-10" alt="落とし物" src={modalData?.image_url}/></div>
+                  <div tw="flex justify-center items-center space-x-20">
                     <Modalicon category={modalData?.category}/>
+                    <Colorcircle color={modalData?.color} tw="w-12 h-12" />
                   </div>
-                  <div tw="w-full text-center mt-10">{modalData?.detail}</div>
-                  <div tw="flex justify-center ">
-                    <button onClick={() => setModal(false)}
-                      tw="bg-white w-1/4 mt-10 shadow-custom pl-5 pr-5 pt-4 pb-4 rounded-3xl">
-                      受け取る
-                    </button>
-                  </div>
+                  <div tw="w-full text-center mt-10 text-2xl">{modalData?.detail}</div>
                 </div>
               </Modal>
             </>
