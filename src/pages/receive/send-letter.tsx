@@ -22,7 +22,7 @@ const ReceiveSendLetter: React.FC = () => {
     }
     axios({
       method: 'PATCH',
-      url: 'http://localhost:3000/laf/receive',
+      url: 'https://togather-api.takumma.net/laf/receive',
       data: requestData,
       headers: {
         'Content-Type': 'application/json',
