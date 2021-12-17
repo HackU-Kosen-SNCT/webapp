@@ -1,29 +1,37 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { css } from '@emotion/react'
 import React from 'react'
-import tw from 'twin.macro'
+import tw, { css } from 'twin.macro'
+import { allowCategories, categories, categoryTexts, toAllowCategory } from '../category'
 import { CategoryButton } from './'
 
-/*
- * TODO: カテゴリの名前しか設定できないようになっているので見直す必要あり
- * サーバー上でカテゴリのスキーマがどうなっているか分からなかったので、ひとまず名前だけ設定できるようにしている
- * もしカテゴリのIDを各カテゴリのボタン要素に持たせる必要があるなら、型や各要素のpropsなどを変更してください
- */
 type CategoryShelfProperties = {
-  mainLabel: string,
-  subLabels: string[],
+  label: string,
+  categoryLabels: categoryTexts[]
   onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const CategoryShelf: React.FC<CategoryShelfProperties> = ({ mainLabel, subLabels, onClick }) => (
+const CategoryShelf: React.FC<CategoryShelfProperties> = ({ label, categoryLabels, onClick }) => (
   <div tw="w-full flex flex-col space-y-6">
-    <span tw="border-b-1 text-deepdeepgrey2 font-bold text-xl">{mainLabel}</span>
+    <span tw="border-b-1 text-deepdeepgrey2 font-bold text-xl">{label}</span>
     <div tw="grid grid-cols-4 gap-x-12 gap-y-8">
       {
-        subLabels.map((subLabel, index) => (
-          <CategoryButton key={index} onClick={onClick}>{subLabel}</CategoryButton>
-        ))
+        categoryLabels.map((categoryLabel, index) => {
+          const category = categories[toAllowCategory(categoryLabel) as allowCategories]
+
+          return (
+            <CategoryButton
+              key={index}
+              // eslint-disable-next-line security/detect-object-injection
+              icon={category.icon}
+              iconStyles={css(tw`w-16 h-16`)}
+              onClick={onClick}
+            >
+              {/* eslint-disable-next-line security/detect-object-injection */}
+              {category.name}
+            </CategoryButton>
+          )
+        })
       }
     </div>
   </div>
