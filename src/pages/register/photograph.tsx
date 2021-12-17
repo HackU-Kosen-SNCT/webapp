@@ -1,6 +1,6 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable max-lines-per-function */
-import React, { useRef, useState } from 'react'
+/* eslint-disable max-statements */
+import React, { useState } from 'react'
 import Webcam from 'react-webcam'
 import { SetterOrUpdater, useSetRecoilState } from 'recoil'
 import tw, { css } from 'twin.macro'
@@ -8,58 +8,55 @@ import { useLocation } from 'wouter'
 import undrawCamera from '../../assets/undraw_camera_re_cnp4.svg'
 import { BackButton, Progress, TextButton } from '../../components'
 import { CenteringLayout } from '../../layouts'
-import { pictureData, RegisterItem, registerItemState } from '../../store'
-
-const videoConstraints = {
-  facingMode: 'user',
-  height: 360,
-  width: 720
-}
+import { pictureData } from '../../store'
 
 // eslint-disable-next-line max-statements
 const RegisterPhotograph: React.FC = () => {
   const [imageSource, setImageSource] = useState<string>(undrawCamera as string)
-  const inputElement = useRef<HTMLInputElement>(null)
-  const setRegisterItemState: SetterOrUpdater<RegisterItem> = useSetRecoilState(registerItemState)
-
   const setPictureDataState: SetterOrUpdater<string> = useSetRecoilState(pictureData)
-
   const [, setLocation] = useLocation()
-
   const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false)
+  const [isWebcamSelfie, setIsWebcamSelfie] = useState<boolean>(false)
   const webcamReference = React.useRef<Webcam>(null)
-  // eslint-disable-next-line unicorn/no-null
-  const [url, setUrl] = useState<string | null>(null)
+  const [, setUrl] = useState<string | null>()
   const capture = React.useCallback(
     () => {
-      const imageReference = webcamReference.current?.getScreenshot()
-      if (imageReference) {
-        setUrl(imageReference)
-        setImageSource(imageReference)
+      const image = webcamReference.current?.getScreenshot()
+      if (image) {
+        setUrl(image)
+        setImageSource(image)
       }
     },
     [webcamReference]
   )
 
-  // 写真のdata urlを取得できるのでどこか（storeなりurlパラメータなり）にぶちこむ
-  const handleChange = () => {
-    if (inputElement.current && inputElement.current.files) {
-      const reader = new FileReader()
-      const { 0: file } = inputElement.current.files
-      reader.onloadend = () => {
-        setImageSource(reader.result as string)
-      }
-      reader.readAsDataURL(file)
-    }
-    setRegisterItemState((previousValue) => ({
-      category: previousValue.category,
-      color: previousValue.color,
-      created_at: previousValue.created_at,
-      detail: previousValue.detail,
-      image_url: imageSource,
-      item_id: previousValue.item_id
-    }))
+  const videoConstraints = {
+    facingMode: isWebcamSelfie ? 'user' : { exact: 'environment' },
+    height: 360,
+    width: 720
   }
+
+  /*
+   * 写真のdata urlを取得できるのでどこか（storeなりurlパラメータなり）にぶちこむ
+   * const handleChange = () => {
+   *   if (inputElement.current && inputElement.current.files) {
+   *     const reader = new FileReader()
+   *     const { 0: file } = inputElement.current.files
+   *     reader.onloadend = () => {
+   *       setImageSource(reader.result as string)
+   *     }
+   *     reader.readAsDataURL(file)
+   *   }
+   *   setRegisterItemState((previousValue) => ({
+   *     category: previousValue.category,
+   *     color: previousValue.color,
+   *     created_at: previousValue.created_at,
+   *     detail: previousValue.detail,
+   *     image_url: imageSource,
+   *     item_id: previousValue.item_id
+   *   }))
+   * }
+   */
 
   const handleSubmit = () => {
     setPictureDataState(imageSource)
@@ -84,6 +81,9 @@ const RegisterPhotograph: React.FC = () => {
         )}
         {isCaptureEnable && (
           <>
+            <TextButton as="label" onClick={() => setIsWebcamSelfie(!isWebcamSelfie)}>
+              {'カメラ反転'}
+            </TextButton>
             <div>
               <Webcam
                 audio={false}

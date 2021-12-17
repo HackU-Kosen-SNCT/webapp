@@ -49,7 +49,7 @@ const RegisterDetails: React.FC = () => {
   return (
     <FixedLayout
       title="落とし物について教えてください"
-      headerProps={{ css: css(tw`underline`) }}
+      headerProps={{ css: css(tw`px-12 mb-12 underline`) }}
       topComponent={
         <>
           <BackButton />
