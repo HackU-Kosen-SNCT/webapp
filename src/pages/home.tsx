@@ -17,7 +17,7 @@ const HomeImageButton =
 
 const imageButtons = [
   {
-    href: '/register',
+    href: '/register/select-category',
     label: '落とし物登録',
     src: undrawCollecting as string
   },
@@ -27,7 +27,7 @@ const imageButtons = [
     src: undrawDeliveries as string
   },
   {
-    href: '/receive',
+    href: '/receive/select-laf',
     label: '落とし物受け取り',
     src: undrawOrderDelivered as string
   }
