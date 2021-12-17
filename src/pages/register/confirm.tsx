@@ -90,7 +90,7 @@ const RegisterConfirm: React.FC = () => {
     // API access
     axios({
       method: 'POST',
-      url: 'http://localhost:3000/laf',
+      url: 'https://togather-api.takumma.net/laf',
       data: requestData,
       headers: {
         'Content-Type': 'application/json',

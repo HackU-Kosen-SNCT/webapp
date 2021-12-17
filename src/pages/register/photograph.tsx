@@ -9,9 +9,9 @@ import { pictureData, RegisterItem, registerItemState } from '../../store'
 import Webcam from 'react-webcam'
 
 const videoConstraints = {
-  width: 720,
+  facingMode: 'environment',
   height: 360,
-  facingMode: 'user'
+  width: 720
 }
 
 // eslint-disable-next-line max-lines-per-function
