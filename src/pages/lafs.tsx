@@ -1,12 +1,11 @@
 import axios from 'axios'
-// eslint-disable-next-line import/no-unresolved
-import { categoryTexts } from 'category'
 import { ColorType } from 'color'
 import { useState } from 'preact/hooks'
 import React, { useEffect } from 'react'
 import tw from 'twin.macro'
 import undrawDogWorking from '../assets/undraw_dog_walking_re_l61p 1.svg'
 import undrawEmpty from '../assets/undraw_empty.svg'
+import { categoryTexts } from '../category'
 import { BackButton, Colorcircle, LafShelf, Modal, Modalicon } from '../components'
 import { FixedLayout } from '../layouts'
 

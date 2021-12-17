@@ -30,7 +30,7 @@ const ReceiveSendLetter: React.FC = () => {
       method: 'PATCH',
       url: 'https://togather-api.takumma.net/laf/receive'
     }).then(() => {
-      setLocation('/register/complete')
+      setLocation('/receive/complete')
     })
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       .catch(() => {})
