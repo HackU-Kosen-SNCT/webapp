@@ -8,7 +8,7 @@ import { Switch, Route, Redirect } from 'wouter'
 import * as pages from '../pages'
 
 const customStyles = css`
-  * {
+  :not(input):not(textarea) {
     user-select: none;
   }
   img {

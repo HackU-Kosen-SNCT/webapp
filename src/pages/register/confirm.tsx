@@ -57,7 +57,7 @@ const RegisterConfirm: React.FC = () => {
         accept: 'application/json'
       },
       method: 'POST',
-      url: 'http://localhost:3000/laf'
+      url: 'https://togather-api.takumma.net/laf'
     }).then(() => {
       setLocation('/register/complete')
     })
