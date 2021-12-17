@@ -27,7 +27,7 @@ const LafOverview: React.FC<LafOverviewProperties> = ({
       <CategoryButton
         tw="pointer-events-none"
         icon={categories[toAllowCategory(category)].icon}
-        iconStyles={css(tw`w-8 h-8`)}
+        iconStyles={css(tw`w-12 h-12`)}
       >
         {category}
       </CategoryButton>
