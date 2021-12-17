@@ -8,7 +8,7 @@ import { useLocation } from 'wouter'
 import undrawDogWorking from '../../assets/undraw_dog_walking_re_l61p 1.svg'
 import undrawEmpty from '../../assets/undraw_empty.svg'
 import { categoryTexts } from '../../category'
-import { BackButton, Modal, Progress, LafShelf, Colorcircle } from '../../components'
+import { BackButton, Modal, Progress, LafShelf, Colorcircle, Modalicon } from '../../components'
 import { FixedLayout } from '../../layouts'
 import { receiveModalDataState } from '../../store'
 
