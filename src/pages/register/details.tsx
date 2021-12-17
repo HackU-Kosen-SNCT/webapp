@@ -27,15 +27,15 @@ export const colors: ColorType[] = [
 // eslint-disable-next-line max-lines-per-function
 const RegisterDetails: React.FC = () => {
   const [, setLocation] = useLocation()
-  const [color, setColor] = useState<ColorType>('#FFFFFF')
-  const [detail, setDetail] = useState<string>('')
+  const [Color, setColor] = useState<ColorType>('#FFFFFF')
+  const [Detail, setDetail] = useState<string>('')
   const setRegisterItemState: SetterOrUpdater<RegisterItem> = useSetRecoilState(registerItemState)
   const handleSubmit = () => {
     setRegisterItemState((previousValue: RegisterItem) => ({
       category: previousValue.category,
-      color,
+      color: Color,
       created_at: previousValue.created_at,
-      detail,
+      detail: Detail,
       image_url: previousValue.image_url,
       item_id: previousValue.item_id
     }))
@@ -62,10 +62,8 @@ const RegisterDetails: React.FC = () => {
       <form tw="w-full space-y-12 flex flex-col items-center">
         <div tw="w-full">
           <Heading variant="h3">色</Heading>
-          {/* TODO: フォームを作る */}
           <ColorPickerBox
             colors={colors}
-            // 以下のようにevent.target.idから現在の色を取得できる
             onChange={onChangeColor}
           />
         </div>
