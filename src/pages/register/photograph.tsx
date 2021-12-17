@@ -11,7 +11,7 @@ import Webcam from 'react-webcam'
 const videoConstraints = {
   width: 720,
   height: 360,
-  facingMode: 'user'
+  facingMode: { exact: "environment" }
 }
 
 // eslint-disable-next-line max-lines-per-function

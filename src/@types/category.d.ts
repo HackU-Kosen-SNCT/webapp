@@ -42,7 +42,7 @@ export type categoryTexts =
   '衣料品'|
   'その他';
 
-export const toCategoryText = (category: allowCategories): categoryTexts => {
+export const toCategoryText = (category: string): categoryTexts => {
   switch (category) {
     case 'wallet':
       return '財布';
