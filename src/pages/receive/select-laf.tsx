@@ -9,6 +9,7 @@ import { FixedLayout } from '../../layouts'
 import { ReceiveItem, receiveModalDataState } from '../../store'
 import { useLocation } from 'wouter'
 import { categoryTexts, ColorType } from '../../types'
+import tw from 'twin.macro'
 
 export type item = {
   item_id: string
@@ -62,12 +63,8 @@ const ReceiveSelectLaf: React.FC = () => {
 
 
   const handleClick = () => {
-    // storeに値を突っ込む
     setReceiveModalData(modalData)
-
-    // モーダルの解除
     setModal(false)
-    //遷移
     setLocation('/receive/confirm')
   }
 
