@@ -9,7 +9,6 @@ import { CenteringLayout } from '../layouts'
 
 const HomeImageButton =
   (properties: React.ComponentProps<typeof ImageButton>) =>
-    // eslint-disable-next-line implicit-arrow-linebreak
     <ImageButton
       {...properties}
       tw="py-6"

@@ -1,11 +1,12 @@
 import React from 'react'
 import tw from 'twin.macro'
 import { CategoryButton, Color, Text, TextButton } from './'
+import { allowCategories, categoryTexts } from '../@types/category'
 
 type LafOverviewProperties = {
   imageSource: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>['src'],
-  category: string,
-  description: string
+  category: categoryTexts,
+  detail: string | null
   color: string,
   actionLabel: string,
   actionButtonProps: React.ComponentProps<React.ReactHTML['button']>
@@ -14,7 +15,7 @@ type LafOverviewProperties = {
 const LafOverview: React.FC<LafOverviewProperties> = ({
   imageSource,
   category,
-  description,
+  detail,
   color,
   actionLabel,
   actionButtonProps,
@@ -23,17 +24,17 @@ const LafOverview: React.FC<LafOverviewProperties> = ({
   <div tw="flex flex-col items-center space-y-8" {...rest}>
     <img src={imageSource} alt={category} tw="h-60 rounded-3xl" />
     <div tw="w-full flex  items-center justify-evenly">
-      <CategoryButton tw="pointer-events-none">カギ</CategoryButton>
+      <CategoryButton tw="pointer-events-none">{category}</CategoryButton>
       <Color color={color} tw="pointer-events-none" />
     </div>
     <p tw="max-w-xl overflow-hidden truncate text-xl font-semibold">
       {
-        description.split('\\n').map((descriptionLine, index) => (
+        detail ? detail.split('\\n').map((detail, index) => (
           <>
-            <Text key={index}>{descriptionLine}</Text>
+            <Text key={index}>{detail}</Text>
             <br />
           </>
-        ))
+        )) : ''
       }
     </p>
     <TextButton {...actionButtonProps}>{actionLabel}</TextButton>

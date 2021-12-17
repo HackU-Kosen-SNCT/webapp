@@ -4,6 +4,7 @@ import { css } from '@emotion/react'
 import React from 'react'
 import tw from 'twin.macro'
 import { CategoryButton } from './'
+import { categoryTexts } from '../@types/category'
 
 /*
  * TODO: カテゴリの名前しか設定できないようになっているので見直す必要あり
@@ -40,7 +41,7 @@ const Colorcircle: React.VFC<ColorProperties> = ({ color }) => (
 )
 
 type LafShelfProperties = {
-  category : string
+  category : categoryTexts
   imgurl : string
   color : string
   onClick: React.MouseEventHandler<HTMLDivElement>

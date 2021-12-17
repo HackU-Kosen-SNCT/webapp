@@ -1,10 +1,10 @@
 import { css, Global } from '@emotion/react'
 import React from 'react'
 import { GlobalStyles } from 'twin.macro'
-// eslint-disable-next-line import/no-unresolved
 import { useRegisterSW } from 'virtual:pwa-register/react'
 import { Switch, Route, Redirect } from 'wouter'
 import * as pages from '../pages'
+import { RecoilRoot } from 'recoil'
 
 const customStyles = css`
   * {
@@ -19,7 +19,7 @@ const App: React.FC = () => {
   useRegisterSW()
 
   return (
-    <>
+    <RecoilRoot>
       <GlobalStyles />
       <Global styles={customStyles} />
       <Switch>
@@ -42,7 +42,7 @@ const App: React.FC = () => {
         <Route path="/register/complete" component={pages.RegisterComplete} />
         <Route component={pages.NotFound} />
       </Switch>
-    </>
+    </RecoilRoot>
   )
 }
 
