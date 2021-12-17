@@ -108,7 +108,7 @@ const ReceiveSelectLaf: React.FC = () => {
                       setModalData({
                         category: laf.category,
                         color: laf.color,
-                        detail: '',
+                        detail: laf.detail,
                         image_url: laf.image_url,
                         item_id: laf.item_id
                       })
@@ -118,12 +118,12 @@ const ReceiveSelectLaf: React.FC = () => {
                 ))}
               </div>
               <Modal active={modal} onClick={() => setModal(false)}>
-                <div tw="w-1/2 h-3/4 bg-lightgrey2 rounded-xl">
+                <div tw="w-1/2 py-8 bg-lightgrey2 rounded-xl">
                   <div tw="w-full mt-14 mb-6 text-center text-primarydeep
                             text-3xl font-semibold underline">
                     この落とし物を受け取りますか?
                   </div>
-                  <div tw="w-1/2 m-0 m-auto"><img tw="rounded-xl" alt="落とし物の画像" src={modalData?.image_url}/></div>
+                  <div tw="w-1/2 m-0 m-auto"><img tw="rounded-xl" alt="落とし物" src={modalData?.image_url}/></div>
                   <div tw="flex justify-center">
                     <Modalicon category={modalData?.category}/>
                   </div>
