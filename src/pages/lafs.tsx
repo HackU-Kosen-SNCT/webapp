@@ -54,7 +54,8 @@ const Lafs: React.FC = () => {
       url: 'https://togather-api.takumma.net/laf'
     })
       .then((result: response) => {
-        setLafs(result.data.items)
+        const items = result.data.items.filter((element) => element.received_at === null)
+        setLafs(items)
       })
       .catch(() => {
         setError(true)
