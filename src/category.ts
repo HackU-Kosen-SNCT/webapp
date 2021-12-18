@@ -1,3 +1,5 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable sonarjs/no-duplicate-string */
 import { IconType } from 'react-icons'
 import { AiFillUsb as Usb } from 'react-icons/ai'
 import { BiBook as Book, BiWallet as Wallet } from 'react-icons/bi'
@@ -96,7 +98,7 @@ const categories: Categories = {
   }
 }
 
-const toCategoryText = (category: allowCategories): categoryTexts => {
+const toCategoryText = (category: string): categoryTexts => {
   // eslint-disable-next-line default-case
   switch (category) {
   case 'wallet':
@@ -122,6 +124,8 @@ const toCategoryText = (category: allowCategories): categoryTexts => {
   case 'clothing':
     return '衣料品'
   case 'others':
+    return 'その他'
+  default:
     return 'その他'
   }
 }
