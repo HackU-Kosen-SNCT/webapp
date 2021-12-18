@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react'
 import tw, { css } from 'twin.macro'
-import { categories, categoryTexts, toAllowCategory } from '../category'
+import { categories, categoryTexts, toAllowCategory, toCategoryText } from '../category'
 import { CategoryButton } from './'
 
 type CategoryShelfProperties = {
@@ -60,7 +60,7 @@ const LafShelf: React.VFC<LafShelfProperties> = ({ category, imgurl, color, onCl
   <div onClick={onClick} key={key}>
     <img tw="rounded-lg" src={imgurl} alt="落とし物画像"/>
     <div tw="flex items-center mt-3">
-      <span tw="m-0 m-auto  text-2xl pl-5 font-bold">{category}</span>
+      <span tw="m-0 m-auto  text-2xl pl-5 font-bold">{toCategoryText(category)}</span>
       <Colorcircle color ={color}/>
     </div>
   </div>
