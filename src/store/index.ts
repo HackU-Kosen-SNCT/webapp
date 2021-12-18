@@ -1,11 +1,11 @@
 // eslint-disable-next-line import/no-unresolved
 import { ColorType } from 'color'
 import { atom } from 'recoil'
-import { categoryTexts } from '../category'
+import { allowCategories } from '../category'
 import { modaldata } from '../pages/receive/select-laf'
 
 export type RegisterItem = {
-  category: categoryTexts;
+  category: allowCategories;
   detail: string | null;
   color: ColorType;
   created_at: string;
@@ -17,7 +17,7 @@ export type ReceiveItem = {
   item_id: string;
   message: string;
   received_at: string;
-  category: categoryTexts;
+  category: allowCategories;
   detail: string | null;
   color: ColorType;
   imsge_url: string;
@@ -26,7 +26,7 @@ export type ReceiveItem = {
 // 落とし物登録時
 export const registerItemState = atom<RegisterItem>({
   default: {
-    category: 'その他',
+    category: 'others',
     color: '#FFFFFF',
     created_at: '',
     detail: '',
@@ -45,7 +45,7 @@ export const pictureData = atom<string>({
 // 落とし物受け取る時
 export const receiveModalDataState = atom<modaldata>({
   default: {
-    category: 'USBメモリ',
+    category: 'others',
     color: '#FFFFFF',
     detail: '',
     image_url: '',

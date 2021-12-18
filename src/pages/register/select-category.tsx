@@ -3,7 +3,7 @@ import React from 'react'
 import { SetterOrUpdater, useSetRecoilState } from 'recoil'
 import tw from 'twin.macro'
 import { useLocation } from 'wouter'
-import { categoryTexts } from '../../category'
+import { allowCategories } from '../../category'
 import { BackButton, CategoryShelf, Progress } from '../../components'
 import { FixedLayout } from '../../layouts'
 import { RegisterItem, registerItemState } from '../../store'
@@ -13,8 +13,7 @@ const RegisterSelectCategory: React.FC = () => {
   const [, setLocation] = useLocation()
   const setRegisterItemState: SetterOrUpdater<RegisterItem> = useSetRecoilState(registerItemState)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    // storeにカテゴリをぶち込む
-    const Category = (event.target as (Element & { textContent: string })).textContent as categoryTexts
+    const Category = (event.target as (Element & { textContent: string })).textContent as allowCategories
     setRegisterItemState((previousValue: RegisterItem) => ({
       category: Category,
       color: previousValue.color,
@@ -37,11 +36,6 @@ const RegisterSelectCategory: React.FC = () => {
       scrollable
       autoHeight
     >
-      {/*
-       * TODO: 仮の値から変更する
-       * カテゴリをバックエンドから取得するのでも可（どういうデータ取れるか知らない）、既にフロントに記述しておくのでも可
-       * CategoryShelfコンポーネントのコメントは要チェック
-       */}
       <div tw="mx-12 space-y-16">
         <CategoryShelf label="貴重品" categoryLabels={['財布', 'スマホ', 'カギ']} onClick={handleClick} />
         <CategoryShelf

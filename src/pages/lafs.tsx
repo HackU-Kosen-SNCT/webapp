@@ -5,13 +5,13 @@ import React, { useEffect } from 'react'
 import tw from 'twin.macro'
 import undrawDogWorking from '../assets/undraw_dog_walking_re_l61p 1.svg'
 import undrawEmpty from '../assets/undraw_empty.svg'
-import { categoryTexts } from '../category'
+import { allowCategories } from '../category'
 import { BackButton, Colorcircle, LafShelf, Modal, Modalicon } from '../components'
 import { FixedLayout } from '../layouts'
 
 type item = {
   item_id: string
-  category: categoryTexts
+  category: allowCategories
   color: ColorType
   detail: string | null
   image_url: string
@@ -26,7 +26,7 @@ type response = {
 }
 
 type modaldata = {
-  category: categoryTexts
+  category: allowCategories
   color: ColorType
   detail: string | null
   image_url: string
@@ -38,7 +38,7 @@ const Lafs: React.FC = () => {
   const [error, setError] = useState<boolean>(false)
   const [modal, setModal] = useState<boolean>(false)
   const [modalData, setModalData] = useState<modaldata>({
-    category: 'その他',
+    category: 'others',
     color: '#FFFFFF',
     detail: '',
     image_url: ''

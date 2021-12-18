@@ -33,7 +33,7 @@ const RegisterConfirm: React.FC = () => {
       return
     }
     const requestData = {
-      category: toAllowCategory(registerItemValue.category),
+      category: registerItemValue.category,
       color: registerItemValue.color,
       created_at: new Date().toISOString(),
       detail: registerItemValue.detail,

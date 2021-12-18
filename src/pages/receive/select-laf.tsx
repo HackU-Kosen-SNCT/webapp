@@ -7,14 +7,14 @@ import tw from 'twin.macro'
 import { useLocation } from 'wouter'
 import undrawDogWorking from '../../assets/undraw_dog_walking_re_l61p 1.svg'
 import undrawEmpty from '../../assets/undraw_empty.svg'
-import { categoryTexts } from '../../category'
+import { allowCategories } from '../../category'
 import { BackButton, Modal, Progress, LafShelf, Colorcircle, Modalicon } from '../../components'
 import { FixedLayout } from '../../layouts'
 import { receiveModalDataState } from '../../store'
 
 export type item = {
   item_id: string
-  category: categoryTexts
+  category: allowCategories
   color: ColorType
   detail: string | null
   image_url: string
@@ -29,7 +29,7 @@ type response = {
 }
 
 export type modaldata = {
-  category: categoryTexts
+  category: allowCategories
   color: ColorType
   detail: string
   image_url: string
@@ -42,7 +42,7 @@ const ReceiveSelectLaf: React.FC = () => {
   const [error, setError] = useState<boolean>(false)
   const [modal, setModal] = useState<boolean>(false)
   const [modalData, setModalData] = useState<modaldata>({
-    category: 'その他',
+    category: 'others',
     color: '#FFFFFF',
     detail: '',
     image_url: '',

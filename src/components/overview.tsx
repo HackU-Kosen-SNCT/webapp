@@ -1,11 +1,11 @@
 import React from 'react'
 import tw, { css } from 'twin.macro'
-import { categories, categoryTexts, toAllowCategory } from '../category'
+import { allowCategories } from '../category'
 import { CategoryButton, Color, Modalicon, Text, TextButton } from './'
 
 type LafOverviewProperties = {
   imageSource: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>['src'],
-  category: categoryTexts,
+  category: allowCategories,
   details: string | null
   color: string,
   actionLabel: string,
