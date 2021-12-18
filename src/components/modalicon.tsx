@@ -18,87 +18,87 @@ type Category ={
 // eslint-disable-next-line max-lines-per-function
 const Modalicon : React.FC<Category> = ({ category }) => {
   switch (category) {
-  case 'wallet':
+  case '財布':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Wallet tw="m-0 m-auto" size={70}/>財布
+        <Wallet tw="m-0 m-auto" size={70}/>{category}
       </div>
     )
     break
-  case 'smartPhone':
+  case 'スマホ':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Smartphone tw="m-0 m-auto" size={70}/>スマホ
+        <Smartphone tw="m-0 m-auto" size={70}/>{category}
       </div>
     )
     break
-  case 'waterBottle':
+  case '水筒':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Waterbottle tw="m-0 m-auto" size={70}/>水筒
+        <Waterbottle tw="m-0 m-auto" size={70}/>{category}
       </div>
     )
     break
-  case 'stationery':
+  case '文房具':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Pencil tw="m-0 m-auto" size={70}/>文房具
+        <Pencil tw="m-0 m-auto" size={70}/>{category}
       </div>
     )
     break
-  case 'key':
+  case 'キー':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Key tw="m-0 m-auto" size={70}/>キー
+        <Key tw="m-0 m-auto" size={70}/>{category}
       </div>
     )
     break
-  case 'usb':
+  case 'USBメモリ':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Usb tw="m-0 m-auto" size={70}/>USB
+        <Usb tw="m-0 m-auto" size={70}/>{category}
       </div>
     )
     break
-  case 'textbook/notebook/file':
+  case '教科書・ノート・ファイル':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Book tw="m-0 m-auto" size={70}/>教科書・ノート・ファイル
+        <Book tw="m-0 m-auto" size={70}/>{category}
       </div>
     )
     break
-  case 'earphone':
+  case 'ヘッドフォン':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Headphone tw="m-0 m-auto" size={70}/>ヘッドフォン
+        <Headphone tw="m-0 m-auto" size={70}/>{category}
       </div>
     )
     break
-  case 'calculator':
+  case '電卓':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Calc tw="m-0 m-auto" size={70}/>電卓
+        <Calc tw="m-0 m-auto" size={70}/>{category}
       </div>
     )
     break
-  case 'umbrella':
+  case '傘':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Umbrella tw="m-0 m-auto" size={70}/>傘
+        <Umbrella tw="m-0 m-auto" size={70}/>{category}
       </div>
     )
     break
-  case 'clothing':
+  case '衣料品':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Clothes tw="m-0 m-auto" size={70}/>衣料品
+        <Clothes tw="m-0 m-auto" size={70}/>{category}
       </div>
     )
     break
-  case 'others':
+  case 'その他':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Other tw="m-0 m-auto" size={70}/>その他
+        <Other tw="m-0 m-auto" size={70}/>{category}
       </div>
     )
     break
