@@ -10,98 +10,87 @@ import { GiWaterBottle as Waterbottle } from 'react-icons/gi'
 import { RiCustomerServiceLine as Headphone } from 'react-icons/ri'
 import { VscJersey as Clothes } from 'react-icons/vsc'
 import tw from 'twin.macro'
+import { allowCategories } from '../category'
 
 type Category ={
-  category : string | undefined
+  category : allowCategories | undefined
 }
 
 // eslint-disable-next-line max-lines-per-function
 const Modalicon : React.FC<Category> = ({ category }) => {
   switch (category) {
-  case '財布':
+  case 'wallet':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Wallet tw="m-0 m-auto" size={70}/>{category}
+        <Wallet tw="m-0 m-auto" size={70}/>財布
       </div>
     )
-    break
-  case 'スマホ':
+  case 'smartPhone':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Smartphone tw="m-0 m-auto" size={70}/>{category}
+        <Smartphone tw="m-0 m-auto" size={70}/>スマホ
       </div>
     )
-    break
-  case '水筒':
+  case 'waterBottle':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Waterbottle tw="m-0 m-auto" size={70}/>{category}
+        <Waterbottle tw="m-0 m-auto" size={70}/>水筒
       </div>
     )
-    break
-  case '文房具':
+  case 'stationery':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Pencil tw="m-0 m-auto" size={70}/>{category}
+        <Pencil tw="m-0 m-auto" size={70}/>文房具
       </div>
     )
-    break
-  case 'キー':
+  case 'key':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Key tw="m-0 m-auto" size={70}/>{category}
+        <Key tw="m-0 m-auto" size={70}/>キー
       </div>
     )
-    break
-  case 'USBメモリ':
+  case 'usb':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Usb tw="m-0 m-auto" size={70}/>{category}
+        <Usb tw="m-0 m-auto" size={70}/>USB
       </div>
     )
-    break
-  case '教科書・ノート・ファイル':
+  case 'textbook/notebook/file':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Book tw="m-0 m-auto" size={70}/>{category}
+        <Book tw="m-0 m-auto" size={70}/>教科書・ノート・ファイル
       </div>
     )
-    break
-  case 'ヘッドフォン':
+  case 'earphone':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Headphone tw="m-0 m-auto" size={70}/>{category}
+        <Headphone tw="m-0 m-auto" size={70}/>ヘッドフォン
       </div>
     )
-    break
-  case '電卓':
+  case 'calculator':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Calc tw="m-0 m-auto" size={70}/>{category}
+        <Calc tw="m-0 m-auto" size={70}/>電卓
       </div>
     )
-    break
-  case '傘':
+  case 'umbrella':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Umbrella tw="m-0 m-auto" size={70}/>{category}
+        <Umbrella tw="m-0 m-auto" size={70}/>傘
       </div>
     )
-    break
-  case '衣料品':
+  case 'clothing':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Clothes tw="m-0 m-auto" size={70}/>{category}
+        <Clothes tw="m-0 m-auto" size={70}/>衣料品
       </div>
     )
-    break
-  case 'その他':
+  case 'others':
     return (
       <div tw="bg-white w-20 rounded-xl mt-3 text-center font-semibold shadow-custom">
-        <Other tw="m-0 m-auto" size={70}/>{category}
+        <Other tw="m-0 m-auto" size={70}/>その他
       </div>
     )
-    break
   // eslint-disable-next-line sonarjs/no-duplicated-branches
   default:
     return (
